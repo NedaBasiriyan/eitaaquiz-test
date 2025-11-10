@@ -1,82 +1,162 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسابقه هوش ایتا - نسخه آزمایشی</title>
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Scheherazade New', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #40E0D0; /* فیروزه‌ای روشن */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            max-width: 400px;
-            text-align: center;
-        }
-        .banner {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .character {
-            width: 100px;
-            margin: 10px;
-        }
-        .start-button {
-            padding: 12px 20px;
-            background-color: #40E0D0;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .start-button:hover {
-            background-color: #34cfcf;
-        }
-        .message {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسابقه هوش ایتا - نسخه آزمایشی</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #40E0D0; /* فیروزه‌ای روشن */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    margin-top: 20px;
+}
+.banner {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.character {
+    width: 80px;
+    margin: 10px;
+}
+.start-button, .next-button {
+    padding: 12px 20px;
+    background-color: #40E0D0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.start-button:hover, .next-button:hover {
+    background-color: #34cfcf;
+}
+.question-container {
+    margin-top: 15px;
+    display: none;
+}
+.option {
+    display: block;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.option:hover {
+    background-color: #f0f0f0;
+}
+.message {
+    font-size: 16px;
+}
+</style>
 </head>
 <body>
 
-    <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/banner.png" alt="بنر مسابقه" class="banner">
+<img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/banner.png" alt="بنر مسابقه" class="banner">
 
-    <div class="container">
-        <div class="message">
-            سلام! 🌟 به ربات «مسابقه هوش ایتا» خوش آمدی!<br>
-            برای شروع مسابقه روی دکمه زیر بزن 👇<br>
-            اگر هنوز عضو کانال <b>@Hamserr</b> نیستی، اول عضویتت را فعال کن تا مسابقه برایت باز شود. 🧠 موفق باشی!
-        </div>
-
-        <div>
-            <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_male.jpeg" alt="کاراکتر مرد" class="character">
-            <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_female.png" alt="کاراکتر زن" class="character">
-        </div>
-
-        <button class="start-button" id="startButton">شروع مسابقه</button>
+<div class="container">
+    <div class="message" id="welcomeMessage">
+        سلام! 🌟 به ربات «مسابقه هوش ایتا» خوش آمدی!<br>
+        برای شروع مسابقه روی دکمه زیر بزن 👇<br>
+        اگر هنوز عضو کانال <b>@Hamserr</b> نیستی، اول عضویتت را فعال کن تا مسابقه برایت باز شود. 🧠 موفق باشی!
     </div>
 
-    <script>
-        document.getElementById('startButton').addEventListener('click', function() {
-            alert('نسخه آزمایشی: بررسی عضویت اجباری هنوز فعال نشده.');
-            // بعد از دریافت Channel ID و USER_ID، این تابع به بررسی عضویت واقعی کاربران تغییر خواهد کرد
-        });
-    </script>
+    <div>
+        <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_male.jpeg" alt="کاراکتر مرد" class="character">
+        <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_female.png" alt="کاراکتر زن" class="character">
+    </div>
+
+    <button class="start-button" id="startButton">شروع مسابقه</button>
+
+    <div class="question-container" id="questionContainer">
+        <div id="questionText"></div>
+        <div id="optionsContainer"></div>
+        <button class="next-button" id="nextButton">سوال بعد</button>
+    </div>
+</div>
+
+<script>
+// کانال‌های عضویت اجباری قابل تغییر
+let requiredChannels = ["@Hamserr"];
+
+// سوالات آزمایشی قابل تغییر توسط کارفرما
+let questions = [
+    {q: "سوال ۱: رنگ آسمان چیست؟", options:["آبی","قرمز","سبز","زرد"], answer:0},
+    {q: "سوال ۲: بزرگترین سیاره کدام است؟", options:["زمین","مریخ","مشتری","زحل"], answer:2},
+    {q: "سوال ۳: پایتخت ایران؟", options:["اصفهان","تهران","شیراز","مشهد"], answer:1},
+    {q: "سوال ۴: حاصل ۵+۷؟", options:["۱۰","۱۲","۱۱","۱۳"], answer:1},
+    {q: "سوال ۵: رنگ پرچم ایران؟", options:["سبز، سفید، قرمز","آبی، سفید، قرمز","مشکی و سفید","زرد و قرمز"], answer:0}
+];
+
+let currentQuestion = 0;
+
+const startButton = document.getElementById("startButton");
+const questionContainer = document.getElementById("questionContainer");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("optionsContainer");
+const nextButton = document.getElementById("nextButton");
+const welcomeMessage = document.getElementById("welcomeMessage");
+
+startButton.addEventListener("click", () => {
+    // بررسی عضویت اجباری (نسخه آزمایشی)
+    alert("نسخه آزمایشی: بررسی عضویت واقعی کاربران هنوز فعال نشده.");
+    welcomeMessage.style.display = "none";
+    startButton.style.display = "none";
+    showQuestion();
+    questionContainer.style.display = "block";
+});
+
+function showQuestion() {
+    const q = questions[currentQuestion];
+    questionText.innerHTML = `<b>${q.q}</b>`;
+    optionsContainer.innerHTML = "";
+    q.options.forEach((opt, index) => {
+        let btn = document.createElement("button");
+        btn.classList.add("option");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(index);
+        optionsContainer.appendChild(btn);
+    });
+}
+
+function checkAnswer(selected) {
+    const correct = questions[currentQuestion].answer;
+    if (selected === correct) {
+        alert("جواب درست! 🎉");
+    } else {
+        alert("جواب نادرست! ❌");
+    }
+}
+
+nextButton.addEventListener("click", () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        alert("مسابقه تمام شد! 🏆");
+        questionContainer.style.display = "none";
+        welcomeMessage.style.display = "block";
+        welcomeMessage.innerHTML = "🎉 تبریک! شما همه سوالات را پاسخ دادید.";
+    }
+});
+</script>
 
 </body>
 </html>
