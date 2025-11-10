@@ -1,0 +1,8 @@
+# ساخت پوشه دارایی‌ها و انتقال تصاویر به مسیر درست
+mkdir -p assets/images
+mv background_turquoise.jpg assets/images/
+mv banner.png assets/images/
+mv character_male.jpeg assets/images/
+mv character_female.png assets/images/
+mv icons.png assets/images/
+mv logo.png assets/images/
