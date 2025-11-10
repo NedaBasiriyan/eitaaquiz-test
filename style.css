@@ -1,58 +1,105 @@
-@font-face {
-  font-family: 'ScheherazadeNew';
-  src: url('assets/fonts/ScheherazadeNew.ttf');
-}
-
 body {
-  font-family: 'ScheherazadeNew', sans-serif;
-  background: url('assets/images/background/bg-solid-turquoise.png') no-repeat center center fixed;
-  background-size: cover;
   margin: 0;
-  padding: 0;
+  font-family: 'Scheherazade New', serif;
+  background-color: #e0f7fa;
   direction: rtl;
-  text-align: center;
 }
 
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.8);
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.welcome-box {
+  background: linear-gradient(135deg, #40c4ff, #ff8a65);
+  padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  padding: 20px;
-  margin-top: 40px;
-}
-
-.banner img {
-  width: 100%;
-  border-radius: 15px;
-}
-
-.main-image {
-  width: 100%;
-  margin-top: 15px;
-  border-radius: 15px;
-}
-
-.start-box {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  margin-top: 10px;
-}
-
-#startBtn {
-  background: #00b3b3;
-  border: none;
-  padding: 12px 25px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   color: white;
-  font-size: 18px;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
+  max-width: 400px;
 }
 
-#startBtn:hover {
-  background: #008c8c;
+.welcome-box .banner {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.join-btn, #start-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.join-btn {
+  background-color: #ffab00;
+  color: #fff;
+  text-decoration: none;
+}
+
+#start-btn {
+  background-color: #00695c;
+  color: #fff;
+}
+
+.characters {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.character {
+  width: 120px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 15px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.character:hover {
+  transform: scale(1.1);
+  border-color: #ffab00;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#selected-character {
+  width: 60px;
+  border-radius: 10px;
+}
+
+#questions-container {
+  margin-top: 20px;
+}
+
+#admin-panel {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+#admin-panel input, #admin-panel select, #admin-panel textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
