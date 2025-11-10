@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'ScheherazadeNew';
+  src: url('assets/fonts/ScheherazadeNew.ttf');
+}
+
+body {
+  font-family: 'ScheherazadeNew', sans-serif;
+  background: url('assets/images/background/bg-solid-turquoise.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  text-align: center;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.banner img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.main-image {
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 15px;
+}
+
+.start-box {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+#startBtn {
+  background: #00b3b3;
+  border: none;
+  padding: 12px 25px;
+  color: white;
+  font-size: 18px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+#startBtn:hover {
+  background: #008c8c;
+}
