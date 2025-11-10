@@ -1,27 +1,82 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مسابقه هوش ایتا | نسخه آزمایشی</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/images/logo/logo-trophy.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسابقه هوش ایتا - نسخه آزمایشی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Scheherazade New', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #40E0D0; /* فیروزه‌ای روشن */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            max-width: 400px;
+            text-align: center;
+        }
+        .banner {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .character {
+            width: 100px;
+            margin: 10px;
+        }
+        .start-button {
+            padding: 12px 20px;
+            background-color: #40E0D0;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .start-button:hover {
+            background-color: #34cfcf;
+        }
+        .message {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header class="banner">
-      <img src="assets/images/ui/banner-main.png" alt="بنر مسابقه">
-    </header>
 
-    <main class="main-screen">
-      <img src="assets/images/ui/screen-main.png" alt="صفحه مسابقه" class="main-image">
-      <div class="start-box">
-        <p>سلام! 🌟 به ربات «مسابقه هوش ایتا» خوش آمدی! برای شروع مسابقه روی دکمه زیر بزن 👇</p>
-        <p>اگر هنوز عضو کانال <strong>@Hamserr</strong> نیستی، اول عضویتت را فعال کن تا مسابقه برایت باز شود. 🧠 موفق باشی!</p>
-        <button id="startBtn">شروع مسابقه</button>
-      </div>
-    </main>
-  </div>
-  <script src="script.js"></script>
+    <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/banner.png" alt="بنر مسابقه" class="banner">
+
+    <div class="container">
+        <div class="message">
+            سلام! 🌟 به ربات «مسابقه هوش ایتا» خوش آمدی!<br>
+            برای شروع مسابقه روی دکمه زیر بزن 👇<br>
+            اگر هنوز عضو کانال <b>@Hamserr</b> نیستی، اول عضویتت را فعال کن تا مسابقه برایت باز شود. 🧠 موفق باشی!
+        </div>
+
+        <div>
+            <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_male.jpeg" alt="کاراکتر مرد" class="character">
+            <img src="https://nedabasiriyan.github.io/eitaaquiz-test/assets/images/character_female.png" alt="کاراکتر زن" class="character">
+        </div>
+
+        <button class="start-button" id="startButton">شروع مسابقه</button>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', function() {
+            alert('نسخه آزمایشی: بررسی عضویت اجباری هنوز فعال نشده.');
+            // بعد از دریافت Channel ID و USER_ID، این تابع به بررسی عضویت واقعی کاربران تغییر خواهد کرد
+        });
+    </script>
+
 </body>
 </html>
