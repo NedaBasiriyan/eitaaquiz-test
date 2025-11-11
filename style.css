@@ -1,105 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
 body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: radial-gradient(circle at center, #0b2331 0%, #071820 100%);
+  color: #fff;
   margin: 0;
-  font-family: 'Scheherazade New', serif;
-  background-color: #e0f7fa;
-  direction: rtl;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.hidden {
-  display: none;
-}
-
-.welcome-box {
-  background: linear-gradient(135deg, #40c4ff, #ff8a65);
-  padding: 30px;
-  border-radius: 20px;
+.intro-container {
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  color: white;
-  max-width: 400px;
+  padding: 50px 20px;
 }
 
-.welcome-box .banner {
-  width: 100%;
-  border-radius: 15px;
-  margin-bottom: 20px;
+.logo {
+  width: 100px;
+  margin-top: 40px;
+  filter: drop-shadow(0 0 10px #00e5d0);
 }
 
-.join-btn, #start-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
+.title {
+  font-size: 26px;
+  margin: 20px 0;
+  color: #00e5d0;
+  text-shadow: 0 0 10px #00e5d0;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 20px auto;
+  max-width: 450px;
+  color: #fff;
+}
+
+.rewards {
+  list-style: none;
+  padding: 0;
+  margin: 30px auto;
+  font-size: 17px;
+}
+
+.rewards li {
   margin: 10px 0;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
+  color: #ffa14a;
 }
 
-.join-btn {
-  background-color: #ffab00;
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.btn {
+  background: linear-gradient(135deg, #00e5d0, #ffa14a);
   color: #fff;
   text-decoration: none;
+  padding: 12px 40px;
+  border-radius: 40px;
+  font-size: 18px;
+  box-shadow: 0 0 20px rgba(0, 229, 208, 0.4);
+  transition: all 0.3s ease;
 }
 
-#start-btn {
-  background-color: #00695c;
-  color: #fff;
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 161, 74, 0.7);
 }
 
-.characters {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.character {
-  width: 120px;
-  cursor: pointer;
-  border: 3px solid transparent;
-  border-radius: 15px;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.character:hover {
-  transform: scale(1.1);
-  border-color: #ffab00;
-}
-
-.quiz-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-#selected-character {
-  width: 60px;
-  border-radius: 10px;
-}
-
-#questions-container {
-  margin-top: 20px;
-}
-
-#admin-panel {
-  background-color: #fff;
+footer {
+  text-align: center;
+  margin-top: 60px;
   padding: 20px;
-  border-radius: 15px;
-  max-width: 500px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-}
-
-#admin-panel input, #admin-panel select, #admin-panel textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #ccc;
 }
