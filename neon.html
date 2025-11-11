@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- اگر فونت Vazirmatn در دسترس نباشد، باید فایل فونت را در پروژه‌تان قرار دهید یا از فونت جایگزین استفاده کنید -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <title>نمونه کادرهای نئونی - متن فارسی</title>
+  <style>
+    :root{
+      --bg: #090b10;
+      --card-bg: rgba(10,14,20,0.45);
+      --neon: #22f0df; /* فیروزه‌ای روشن */
+      --neon-2: #00d1c8;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 16px;
+      --pad: 18px 26px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: 'Vazirmatn', 'Vazir', Tahoma, sans-serif;
+      background: linear-gradient(180deg,var(--bg), #041018 60%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:24px;
+      padding:30px;
+      color: #eafcfb;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      max-width:1000px;
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+    }
+
+    /* صندوق نئونی (کادر) */
+    .neon-box{
+      position:relative;
+      background: var(--card-bg);
+      padding: var(--pad);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 30px rgba(2,8,12,0.6);
+      overflow:visible;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* نور نئون اطراف کادر */
+    .neon-box::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      z-index:-1;
+      border-radius: calc(var(--radius) + 2px);
+      background: linear-gradient(90deg, rgba(34,240,223,0.18), rgba(0,209,200,0.18));
+      filter: blur(14px) saturate(160%);
+      opacity:1;
+    }
+
+    /* لبه درخشان (خط نئون) */
+    .neon-edge{
+      position:absolute;
+      inset:2px;
+      border-radius: calc(var(--radius) - 4px);
+      pointer-events:none;
+      box-shadow: 0 0 18px rgba(34,240,223,0.25), 0 0 40px rgba(0,209,200,0.12) inset;
+      mix-blend-mode:screen;
+    }
+
+    /* متن های روشن داخل کادر */
+    .neon-text{
+      color: var(--neon);
+      font-weight:600;
+      letter-spacing:0.2px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45), 0 0 8px rgba(34,240,223,0.14);
+      display:block;
+      line-height:1.4;
+    }
+
+    .muted{color: #c7f9f3cc; font-weight:400}
+
+    /* اندازه‌ها */
+    .title{font-size:28px}
+    .subtitle{font-size:18px}
+    .question{font-size:20px}
+
+    /* مثال دکمه نئونی */
+    .neon-btn{
+      display:inline-block;
+      margin-top:12px;
+      padding:10px 18px;
+      border-radius:10px;
+      background: linear-gradient(90deg, rgba(34,240,223,0.08), rgba(0,209,200,0.06));
+      border: 1px solid rgba(34,240,223,0.3);
+      color:var(--neon);
+      font-weight:700;
+      text-decoration:none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5), 0 0 18px rgba(34,240,223,0.08);
+    }
+
+    /* اندازه‌های واکنش‌گرا */
+    @media (min-width:720px){
+      .wrap{grid-template-columns: 1fr 1fr}
+      .title{font-size:32px}
+    }
+
+    /* نمونه‌های بیشتر: حاشیه تزئینی نئونی */
+    .neon-outline{
+      position:relative;
+      padding:12px;
+      border-radius:12px;
+      border: 1px solid rgba(34,240,223,0.18);
+      box-shadow: 0 0 18px rgba(34,240,223,0.06);
+    }
+
+    /* برای تست خوانایی: پس‌زمینه تیره‌تر */
+    .dark-bg{background: linear-gradient(180deg,#041018,#021018); padding:20px; border-radius:12px}
+
+    /* راهنمایی سریع برای توسعه‌دهنده */
+    .hint{font-size:13px; color:#9feee6cc}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- کادر: شروع مسابقه -->
+    <div class="neon-box">
+      <div class="neon-edge"></div>
+      <div class="neon-text title">شروع مسابقه</div>
+      <div class="muted subtitle">آماده‌ای؟ با کلیک روی دکمه مسابقه را شروع کن</div>
+      <a class="neon-btn" href="#">شروع</a>
+    </div>
+
+    <!-- کادر: عضو کانال شوید -->
+    <div class="neon-box">
+      <div class="neon-edge"></div>
+      <div class="neon-text title">عضو کانال شوید</div>
+      <div class="muted subtitle">برای دیدن نتایج و دریافت جایزه حتماً در کانال عضو شوید</div>
+      <a class="neon-btn" href="#">عضویت در کانال</a>
+    </div>
+
+    <!-- کادر: سوال مسابقه -->
+    <div class="neon-box">
+      <div class="neon-edge"></div>
+      <div class="neon-text question">سوال مسابقه: بزرگ‌ترین کوه دنیا کدام است؟</div>
+      <div style="margin-top:10px">
+        <label class="neon-outline" style="display:block; margin-bottom:8px">الف) اورست</label>
+        <label class="neon-outline" style="display:block; margin-bottom:8px">ب) کی2</label>
+        <label class="neon-outline" style="display:block">ج) آناکوندا</label>
+      </div>
+    </div>
+
+    <!-- کادر: پیام اطلاع‌رسانی کوچک -->
+    <div class="neon-box dark-bg" style="grid-column: span 2;">
+      <div class="neon-edge"></div>
+      <div class="neon-text title">توجه</div>
+      <div class="muted hint">متن‌ها به‌صورت RTL تنظیم شده‌اند. فونت پیشنهادی: Vazirmatn. برای قراردادن فونت سفارشی، فایل فونت را در پروژه قرار دهید و @font-face اضافه کنید.</div>
+    </div>
+
+  </div>
+</body>
+</html>
