@@ -1,80 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-
+/* 🎯 سبک کلی بدنه */
 body {
-  font-family: 'Vazirmatn', sans-serif;
-  background: radial-gradient(circle at center, #0b2331 0%, #071820 100%);
-  color: #fff;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-}
-
-.intro-container {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(160deg, #003f4f, #009fbf);
+  color: #f0faff;
   text-align: center;
-  padding: 50px 20px;
-}
-
-.logo {
-  width: 100px;
-  margin-top: 40px;
-  filter: drop-shadow(0 0 10px #00e5d0);
-}
-
-.title {
-  font-size: 26px;
-  margin: 20px 0;
-  color: #00e5d0;
-  text-shadow: 0 0 10px #00e5d0;
-}
-
-.description {
-  font-size: 18px;
-  line-height: 1.8;
-  margin: 20px auto;
-  max-width: 450px;
-  color: #fff;
-}
-
-.rewards {
-  list-style: none;
-  padding: 0;
-  margin: 30px auto;
-  font-size: 17px;
-}
-
-.rewards li {
-  margin: 10px 0;
-  color: #ffa14a;
-}
-
-.buttons {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-top: 40px;
 }
 
-.btn {
-  background: linear-gradient(135deg, #00e5d0, #ffa14a);
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 40px;
-  border-radius: 40px;
-  font-size: 18px;
-  box-shadow: 0 0 20px rgba(0, 229, 208, 0.4);
-  transition: all 0.3s ease;
+/* ✨ جلوه عمومی متن‌ها */
+h1, h2, h3, p, label, span {
+  color: #f0faff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
 }
 
-.btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(255, 161, 74, 0.7);
+/* 🎬 بخش اصلی کارت مسابقه */
+.container {
+  background: rgba(0, 60, 75, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.2);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 1.2s ease;
 }
 
-footer {
-  text-align: center;
-  margin-top: 60px;
+/* 🟦 دکمه‌ها */
+button {
+  background: #00bcd4;
+  border: none;
+  color: #ffffff;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.4);
+}
+button:hover {
+  background: #00d9f7;
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.7);
+}
+
+/* 🧠 بخش سوالات */
+.question-box {
+  background: rgba(0, 80, 100, 0.8);
   padding: 20px;
-  font-size: 14px;
-  color: #ccc;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  font-size: 1.1rem;
+}
+
+/* 🔵 گزینه‌ها */
+.option {
+  background: rgba(0, 150, 180, 0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 12px;
+  border-radius: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+.option:hover {
+  background: rgba(0, 200, 230, 0.7);
+  transform: scale(1.02);
+}
+
+/* ✅ حالت انتخاب‌شده */
+.option.correct {
+  background: rgba(0, 255, 150, 0.6);
+  box-shadow: 0 0 12px rgba(0, 255, 150, 0.8);
+}
+.option.incorrect {
+  background: rgba(255, 80, 80, 0.6);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+}
+
+/* 💡 پیام‌ها */
+.message {
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #d9faff;
+}
+
+/* ⚙️ انیمیشن ساده */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 واکنش‌گرایی */
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
+  button {
+    width: 100%;
+  }
 }
