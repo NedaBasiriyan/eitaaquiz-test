@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عضویت در کانال مسابقه</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="join-container">
+    <img src="assets/logo.png" alt="لوگو" class="logo" />
+
+    <h2 class="title">👋 عضویت در کانال مسابقه</h2>
+
+    <p class="description">
+      برای شرکت در مسابقه باید ابتدا در کانال رسمی <strong>@Hamserr</strong> عضو شوید.
+    </p>
+
+    <div class="buttons">
+      <a href="https://eitaa.com/Hamserr" target="_blank" class="btn join-link">
+        📢 ورود به کانال
+      </a>
+
+      <button id="joinedBtn" class="btn confirm">
+        ✅ عضو شدم، ادامه مسابقه
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const joinedBtn = document.getElementById("joinedBtn");
+
+    joinedBtn.addEventListener("click", () => {
+      // ذخیره وضعیت عضویت در حافظه مرورگر
+      localStorage.setItem("joinedChannel", "true");
+
+      // هدایت روان به صفحه انتخاب کاراکتر
+      window.location.href = "character.html";
+    });
+  </script>
+</body>
+</html>
