@@ -1,53 +1,39 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مسابقه هوش ایتا</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مسابقه حقوقی دکتر قهرمان</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
 </head>
+
 <body>
-  <div id="welcome-screen" class="screen">
-    <div class="welcome-box">
-      <img src="assets/images/banner.png" alt="بنر مسابقه" class="banner">
-      <h1>به مسابقه هوش ایتا خوش آمدید!</h1>
-      <p>برای ادامه مسابقه ابتدا باید عضو کانال شوید.</p>
-      <a href="https://eitaa.com/Hamserr" target="_blank" class="join-btn" id="join-channel-btn">عضویت در کانال</a>
-      <button id="start-btn" disabled>شروع مسابقه</button>
+  <div class="intro-container">
+    <img src="assets/logo.png" alt="لوگو" class="logo" />
+    <h1 class="title">مسابقه حقوقی دکتر قهرمان ⚖️</h1>
+
+    <p class="description">
+      سلام! 🎉  
+      در این مسابقه حقوقی جذاب شرکت کن، به سوالات پاسخ بده و شانس خودت رو برای برنده شدن جوایز نقدی امتحان کن!
+    </p>
+
+    <ul class="rewards">
+      <li>🏆 نفر اول: ۵۰۰ هزار تومان</li>
+      <li>🥈 نفر دوم: ۲۰۰ هزار تومان</li>
+      <li>🎁 ۸ نفر بعدی: هر کدام ۱۰۰ هزار تومان</li>
+    </ul>
+
+    <div class="buttons">
+      <a href="join.html" class="btn join">عضویت در کانال</a>
+      <a href="character.html" class="btn start">شروع مسابقه</a>
     </div>
   </div>
 
-  <div id="character-screen" class="screen hidden">
-    <h2>کاراکتر خود را انتخاب کنید</h2>
-    <div class="characters">
-      <img src="assets/images/character_male.jpeg" alt="کاراکتر مرد" class="character" data-gender="male">
-      <img src="assets/images/character_female.png" alt="کاراکتر زن" class="character" data-gender="female">
-    </div>
-  </div>
+  <footer>
+    <p>طراحی و توسعه: <strong>مسابقه حقوقی دکتر قهرمان</strong></p>
+  </footer>
 
-  <div id="quiz-screen" class="screen hidden">
-    <div class="quiz-header">
-      <img id="selected-character" src="" alt="کاراکتر انتخاب شده">
-      <h2>مسابقه آغاز شد</h2>
-    </div>
-    <div id="questions-container"></div>
-  </div>
-
-  <div id="admin-panel" class="screen hidden">
-    <h2>پنل مدیریت مسابقه</h2>
-    <label>لینک کانال عضویت اجباری:</label>
-    <input type="text" id="admin-channel-link" value="https://eitaa.com/Hamserr">
-    <label>فعال/غیرفعال کردن مسابقه:</label>
-    <select id="admin-quiz-status">
-      <option value="active">فعال</option>
-      <option value="inactive">غیرفعال</option>
-    </select>
-    <label>سوالات مسابقه (JSON):</label>
-    <textarea id="admin-questions" rows="10">[{"question":"اولین سوال؟","options":["گزینه ۱","گزینه ۲"],"answer":0}]</textarea>
-    <button id="admin-save-btn">ذخیره تنظیمات</button>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
