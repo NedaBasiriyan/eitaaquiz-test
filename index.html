@@ -3,9 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مسابقه حقوقی دکتر قهرمان</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <title>مسابقه حقوقی دکتر قهرمان ⚖️</title>
+
+  <!-- فونت فارسی نرم و خوانا -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #090b10;
+      --neon: #22f0df;
+      --neon-glow: rgba(34, 240, 223, 0.5);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      background: radial-gradient(circle at top, #07131a, #02070a 70%);
+      color: #eafcfb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .intro-container {
+      background: rgba(10, 14, 20, 0.4);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(34, 240, 223, 0.15);
+      position: relative;
+      border: 1px solid rgba(34, 240, 223, 0.15);
+    }
+
+    .intro-container::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(90deg, rgba(34,240,223,0.3), rgba(0,209,200,0.3));
+      filter: blur(10px);
+      z-index: -1;
+    }
+
+    .logo {
+      width: 90px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 8px var(--neon-glow));
+    }
+
+    .title {
+      font-size: 28px;
+      color: var(--neon);
+      text-shadow: 0 0 10px var(--neon-glow);
+      margin-bottom: 15px;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #c7f9f3;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .rewards {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+      color: #aefaf4;
+      font-weight: 500;
+    }
+
+    .rewards li {
+      margin: 6px 0;
+      text-shadow: 0 0 6px rgba(34,240,223,0.3);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      color: var(--neon);
+      border: 1px solid var(--neon);
+      background: rgba(34, 240, 223, 0.08);
+      box-shadow: 0 0 12px rgba(34,240,223,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: rgba(34, 240, 223, 0.15);
+      box-shadow: 0 0 18px rgba(34,240,223,0.5);
+      transform: scale(1.03);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #7feee7;
+      text-shadow: 0 0 8px rgba(34,240,223,0.2);
+    }
+
+    @media (min-width: 768px) {
+      .title { font-size: 32px; }
+      .btn { font-size: 16px; }
+    }
+  </style>
 </head>
 
 <body>
@@ -14,7 +128,7 @@
     <h1 class="title">مسابقه حقوقی دکتر قهرمان ⚖️</h1>
 
     <p class="description">
-      سلام! 🎉  
+      سلام! 🎉 <br>
       در این مسابقه حقوقی جذاب شرکت کن، به سوالات پاسخ بده و شانس خودت رو برای برنده شدن جوایز نقدی امتحان کن!
     </p>
 
@@ -25,15 +139,13 @@
     </ul>
 
     <div class="buttons">
-      <a href="join.html" class="btn join">عضویت در کانال</a>
-      <a href="character.html" class="btn start">شروع مسابقه</a>
+      <a href="join.html" class="btn">عضویت در کانال</a>
+      <a href="character.html" class="btn">شروع مسابقه</a>
     </div>
   </div>
 
   <footer>
     <p>طراحی و توسعه: <strong>مسابقه حقوقی دکتر قهرمان</strong></p>
   </footer>
-
-  <script src="js/main.js"></script>
 </body>
 </html>
