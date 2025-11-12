@@ -1,59 +1,68 @@
 body {
-    margin: 0;
-    font-family: 'Vazir', sans-serif; /* فونت فارسی مدرن */
-    direction: rtl;
-    background-color: #0a0a0a;
-    color: #fff;
+  margin: 0;
+  font-family: "Vazirmatn", sans-serif;
+  background-size: cover;
+  background-position: center;
+  direction: rtl;
+  text-align: center;
+  color: #fff;
 }
 
-.background-main {
-    background-image: url('assets/images/background_main.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.page {
+  padding: 20px;
 }
 
-.welcome-card {
-    background-color: rgba(0,0,0,0.7);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 0 20px #00ffff;
+.logo { width: 100px; margin: 20px auto; display: block; }
+
+.neon-text {
+  color: #00fff7;
+  text-shadow: 0 0 8px #00fff7, 0 0 16px #00fff7;
 }
 
-.welcome-card h1 {
-    font-size: 2em;
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff;
+.neon-box {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00fff7;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 500px;
+  box-shadow: 0 0 15px #00fff7;
 }
 
-.character-selection img {
-    width: 120px;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 2px solid #00ffff;
-    transition: transform 0.2s;
+.neon-button {
+  background: transparent;
+  border: 2px solid #00fff7;
+  color: #00fff7;
+  padding: 10px 25px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.neon-button:hover {
+  background: #00fff7;
+  color: #000;
 }
 
-.character-selection img:hover {
-    transform: scale(1.1);
+.character {
+  width: 120px;
+  margin: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
+.character:hover { transform: scale(1.05); }
 
-button {
-    background-color: #00ffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.2s;
+.character-result { width: 150px; margin: 20px auto; }
+
+.admin-box {
+  margin: 20px auto;
+  max-width: 600px;
 }
-
-button:hover {
-    background-color: #00cccc;
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1em;
 }
