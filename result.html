@@ -1,31 +1,56 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نتیجه مسابقه</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="background-main">
-  <div class="neon-box result-box">
-    <h1>🎉 تبریک! 🎉</h1>
-    <p>امتیاز نهایی شما:</p>
-    <h2 id="final-score">0</h2>
+  <main class="center-area">
+    <div class="neon-box result-box">
+      <h1>🎉 تبریک! 🎉</h1>
+      <p>امتیاز نهایی شما: <span id="final-score">0</span></p>
+      
+      <div class="user-banner">
+        <img id="banner-character" src="" alt="کاراکتر">
+        <p id="banner-text">بنر اختصاصی شما — خوش آمدید!</p>
+      </div>
 
-    <div class="user-banner">
-      <img id="banner-character" src="" alt="کاراکتر">
-      <p id="banner-text">بنر اختصاصی شما</p>
+      <div id="reward-message" style="margin:12px 0; font-weight:600; color:lightgreen;"></div>
+
+      <div class="share-box">
+        <p>لینک دعوت اختصاصی شما:</p>
+        <input id="final-invite" readonly>
+        <button onclick="location.href='index.html'">بازگشت به صفحه اصلی</button>
+      </div>
     </div>
-
-    <button onclick="location.href='index.html'">بازگشت به صفحه اصلی</button>
-  </div>
+  </main>
 </div>
+
 <script>
-const final = localStorage.getItem('finalScore') || 0;
-document.getElementById('final-score').innerText = final;
-const ch = localStorage.getItem('selectedCharacter') || 'female';
-document.getElementById('banner-character').src = `assets/images/character_${ch}.jpeg`;
+(function(){
+  const score = Number(localStorage.getItem('finalScore') || 0);
+  document.getElementById('final-score').innerText = score;
+
+  const ch = localStorage.getItem('selectedCharacter') || 'female';
+  document.getElementById('banner-character').src = `assets/images/character_${ch}.jpeg`;
+
+  // پیام جایزه براساس رتبه نمونه
+  let rewardText = '';
+  if(score >= 25) rewardText = '🏆 تبریک! شما جزو نفرات برتر هستید و جایزه دریافت می‌کنید!';
+  else if(score >= 15) rewardText = '🎖 عالی! نزدیک به نفرات برتر!';
+  else rewardText = '✅ امتیاز شما ثبت شد. برای جایزه بیشتر در مسابقات بعدی تلاش کنید!';
+  document.getElementById('reward-message').innerText = rewardText;
+
+  // لینک دعوت
+  const userInviteId = localStorage.getItem('userInviteId') || Math.floor(Math.random()*900000+100000);
+  localStorage.setItem('userInviteId', userInviteId);
+  document.getElementById('final-invite').value = `${window.location.origin}/quiz.html?ref=${userInviteId}`;
+})();
 </script>
+
 </body>
 </html>
