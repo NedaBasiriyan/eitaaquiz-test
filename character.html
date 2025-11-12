@@ -2,18 +2,46 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>انتخاب کاراکتر</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
+<script src="config.json" type="application/json" id="config"></script>
 </head>
 <body>
-<div class="main-bg">
-    <img src="assets/images/character_female.jpeg" class="character" onclick="selectCharacter('female')">
-    <img src="assets/images/character_male.jpeg" class="character" onclick="selectCharacter('male')">
-    <div class="question-mark">?</div>
-    <div class="info-box">
-        <p>کاراکتر مورد نظر خود را انتخاب کنید تا تجربه شخصی‌سازی شده داشته باشید.</p>
+<div class="main-bg" style="background-image: url('assets/images/background_main.jpg');">
+
+  <div class="character-selection">
+    <h2>کاراکتر خود را انتخاب کنید</h2>
+    <div class="characters">
+      <div class="character" onclick="selectCharacter('female')">
+        <img src="assets/images/character_female.jpeg" alt="کاراکتر زن">
+        <p>زن</p>
+      </div>
+      <div class="character" onclick="selectCharacter('male')">
+        <img src="assets/images/character_male.jpeg" alt="کاراکتر مرد">
+        <p>مرد</p>
+      </div>
     </div>
+  </div>
+
+  <div class="instructions neon-box">
+    <p>با انتخاب کاراکتر، تجربه شخصی‌سازی شده خواهید داشت.</p>
+    <p>می‌توانید با دعوت دوستان امتیاز جمع کنید و جوایز دریافت نمایید.</p>
+  </div>
+
+  <div class="next-button neon-box">
+    <a href="join.html" id="nextBtn" class="btn disabled">ادامه</a>
+  </div>
 </div>
+
+<script>
+let selectedCharacter = null;
+
+function selectCharacter(gender) {
+  selectedCharacter = gender;
+  localStorage.setItem('selectedCharacter', gender);
+  document.getElementById('nextBtn').classList.remove('disabled');
+}
+</script>
 </body>
 </html>
