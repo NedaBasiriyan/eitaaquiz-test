@@ -1,19 +1,35 @@
-<div class="quiz-container">
-  <div class="character-display">
-    <img id="player-character" src="" alt="کاراکتر شما">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>مسابقه — سوالات</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-main">
+    <!-- نوار بالای کوچک: نشان دادن کاراکتر و رتبه/امتیاز -->
+    <div class="top-neon neon-box top-bar">
+      <div class="mini-character" id="mini-character-wrap"></div>
+      <div class="score-inline">امتیاز: <span id="live-score">0</span></div>
+    </div>
+
+    <!-- منطقه سوال -->
+    <main class="quiz-area">
+      <div class="question-card neon-box" id="question-card">
+        <h3 id="question-text">در حال بارگذاری سوال...</h3>
+        <div id="answers" class="answers-list"></div>
+      </div>
+
+      <!-- لینک دعوت / بنر -->
+      <div class="invite-box neon-box" id="invite-box">
+        <p>لینک اختصاصی دعوت (هر عضویت جدید = +1 امتیاز):</p>
+        <input id="invite-link" readonly>
+        <button id="copy-invite" class="btn-small">کپی لینک</button>
+      </div>
+    </main>
   </div>
-  <div id="question-box" class="neon-box">
-    <h3 id="question-text"></h3>
-    <div id="answers"></div>
-  </div>
-  <div class="score-box neon-box">
-    <span>امتیاز: <span id="score">0</span></span>
-  </div>
-</div>
-<script>
-document.getElementById('player-character').src = 
-  localStorage.getItem('character') === 'female' ? 
-  'assets/images/character_female.jpeg' : 
-  'assets/images/character_male.jpeg';
-startQuiz();
-</script>
+
+<script src="quiz.js"></script>
+</body>
+</html>
