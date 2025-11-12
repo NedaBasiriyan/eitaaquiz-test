@@ -1,63 +1,12 @@
 {
-  "quizTitle": "مسابقه حقوقی هم سرّ",
-  "welcomeText": [
-    "خوش آمدید به مسابقه حقوقی هم سرّ!",
-    "در این مسابقه می‌توانید دانش حقوقی خود را محک بزنید و جوایز ارزشمند دریافت کنید."
-  ],
-  "instructions": [
-    "با دعوت از دوستان خود امتیاز دریافت کنید.",
-    "هر پاسخ درست به شما امتیاز می‌دهد و پاسخ غلط هیچ امتیازی ندارد.",
-    "کاراکتر دلخواه خود را انتخاب کنید تا تجربه شخصی‌سازی شده داشته باشید."
-  ],
+  "channel": "@hamserr",
+  "channel_link": "https://eitaa.com/hamserr",
+  "requiredChannels": 1,
   "questions": [
-    {
-      "question": "حق طلاق در قانون ایران به چه کسی تعلق دارد؟",
-      "options": ["زن", "مرد", "هر دو", "هیچ کدام"],
-      "answer": 1,
-      "score": 10
-    },
-    {
-      "question": "مهریه چه زمانی قابل مطالبه است؟",
-      "options": ["بعد از عقد", "بعد از طلاق", "در زمان عقد", "هیچ وقت"],
-      "answer": 1,
-      "score": 10
-    },
-    {
-      "question": "نفقه شامل چه مواردی می‌شود؟",
-      "options": ["غذا و پوشاک", "تفریح و سفر", "خانه و ماشین", "تمام موارد"],
-      "answer": 0,
-      "score": 10
-    },
-    {
-      "question": "خیانت زوج چه تبعات حقوقی دارد؟",
-      "options": ["هیچ", "حق طلاق برای زن", "پرداخت دیه", "تمام موارد"],
-      "answer": 3,
-      "score": 10
-    },
-    {
-      "question": "میانجیگری برای حل اختلافات مالی توسط چه کسی انجام می‌شود؟",
-      "options": ["قاضی", "وکیل", "میانجی رسمی", "دادستان"],
-      "answer": 2,
-      "score": 10
-    }
-  ],
-  "channels": [
-    {
-      "name": "هم سرّ",
-      "username": "hamserr",
-      "inviteLink": "https://eitaa.com/hamserr"
-    }
-  ],
-  "rewards": [
-    "لوح تقدیر",
-    "جوایز نقدی",
-    "امتیازهای ویژه"
-  ],
-  "font": "Vazirmatn, sans-serif",
-  "backgroundMain": "assets/images/background_main.jpg",
-  "characterFemale": "assets/images/character_female.jpeg",
-  "characterMale": "assets/images/character_male.jpeg",
-  "logoMain": "assets/images/logo-main.png",
-  "logoMinimal": "assets/images/logo-minimal.png",
-  "questionBg": "assets/images/question_bg.jpeg"
+    {"q":"سؤال ۱: مطابق قانون، وظیفه قاضی چیست؟","options":["رسیدگی و صدور حکم","اجرای قانون","ثبت قرارداد","نظارت بر بازار"],"answer":0,"score":5},
+    {"q":"سؤال ۲: مهریه چه نوع حقی است؟","options":["مالی","حقوقی","مدنی","اداری"],"answer":0,"score":5},
+    {"q":"سؤال ۳: نفقه معمولاً بر عهدهٔ کیست؟","options":["شوهر","همسر","قاضی","وکیل"],"answer":0,"score":5},
+    {"q":"سؤال ۴: میانجیگری چه مزیتی دارد؟","options":["کاهش اختلاف و هزینه","افزایش دادخواست","تأخیر در دادگاه","افزایش پرونده‌ها"],"answer":0,"score":5},
+    {"q":"سؤال ۵: اولین مرحله در دعوی حقوقی چیست؟","options":["ثبت دادخواست","اعتراض","رأی","اجرای حکم"],"answer":0,"score":5}
+  ]
 }
