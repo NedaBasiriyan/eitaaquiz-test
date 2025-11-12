@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نتیجه مسابقه</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="background-image: url('assets/images/background_main.jpg');">
+<div class="page neon-box">
+  <h2 class="neon-text">🎉 تبریک! مسابقه به پایان رسید 🎉</h2>
+  <img id="resultCharacter" class="character-result" alt="کاراکتر شما">
+  <p id="finalScore" class="neon-text"></p>
+  <p id="resultMsg" class="neon-text"></p>
+  <button class="neon-button" onclick="restartQuiz()">شرکت مجدد</button>
+  <button class="neon-button" onclick="shareResult()">اشتراک‌گذاری در ایتا</button>
+</div>
+
+<script>
+const score = localStorage.getItem('quizScore');
+const total = localStorage.getItem('quizTotal');
+const character = localStorage.getItem('selectedCharacter');
+document.getElementById('resultCharacter').src = character;
+document.getElementById('finalScore').innerText = `امتیاز شما: ${score} از ${total}`;
+
+const msg = score == total ? "عالی بود! 👏" :
+            score >= total/2 ? "خوب بود، ولی می‌تونی بهتر بشی 💪" :
+            "اشکال نداره! تجربه ارزشمنده 😊";
+document.getElementById('resultMsg').innerText = msg;
+
+function restartQuiz(){ window.location.href = "character.html"; }
+function shareResult(){
+  const text = `من در مسابقه حقوقی هم‌سرّ امتیاز ${score}/${total} گرفتم! 🎯
+https://nedabasiriyan.github.io/eitaaquiz-test/`;
+  window.open(`https://eitaa.com/share/url?url=${encodeURIComponent(text)}`, '_blank');
+}
+</script>
+</body>
+</html>
