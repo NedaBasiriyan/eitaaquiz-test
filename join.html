@@ -5,40 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عضویت در کانال</title>
 <link rel="stylesheet" href="style.css">
-<style>
-  body { font-family: Vazirmatn, sans-serif; background:#0a192f; color:#fff; margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh;}
-  .container { text-align:center; background:rgba(0,255,224,0.08); padding:30px; border-radius:15px; max-width:400px; }
-  h2 { color:#00ffe0; margin-bottom:20px; }
-  a.button { display:inline-block; margin:10px 0; padding:12px 20px; background:#00ffe0; color:#000; font-weight:bold; border-radius:10px; text-decoration:none; }
-  a.button:hover { background:#00ffb0; }
-  #joinMsg { margin-top:10px; font-weight:bold; }
-</style>
 </head>
-<body>
-<div class="container">
-  <h2>برای شرکت در مسابقه ابتدا در کانال زیر عضو شوید</h2>
-  <a href="https://t.me/YourChannelName" target="_blank" class="button" id="goChannel">رفتن به کانال</a>
-  <button class="button" id="confirmJoin">عضو شدم</button>
-  <div id="joinMsg"></div>
-</div>
+<body class="background-main">
+
+<header class="top-header">
+  <img class="logo" src="assets/images/logo-main.png" alt="لوگو مسابقه">
+</header>
+
+<main class="center-area">
+  <div class="neon-box">
+    <h1>👋 برای شرکت در مسابقه</h1>
+    <p>ابتدا می‌توانید کانال رسمی مسابقه را مشاهده کنید:</p>
+
+    <a class="btn-secondary" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">باز کردن کانال</a>
+
+    <p>پس از مشاهده، روی دکمه زیر کلیک کنید تا وارد مسابقه شوید:</p>
+    <button class="btn-primary" id="continue-btn">✅ ادامه مسابقه</button>
+  </div>
+</main>
 
 <script>
-  const confirmBtn = document.getElementById('confirmJoin');
-  const msgDiv = document.getElementById('joinMsg');
-
-  confirmBtn.addEventListener('click', ()=>{
-    // بررسی واقعی عضویت با API ایتا (در نسخه آزمایشی فقط تایید ساده است)
-    // اگر در نسخه اصلی از ایتا توکن و API استفاده شود، اینجا بررسی واقعی انجام می‌شود
-    // برای نسخه آزمایشی:
-    const confirmed = confirm('آیا واقعاً عضو کانال شدید؟');
-    if(confirmed){
-      localStorage.setItem('joinedChannel', 'true');
-      msgDiv.innerText = '✅ عضویت تأیید شد! شما به مسابقه هدایت می‌شوید...';
-      setTimeout(()=>{ window.location.href = 'quiz.html'; }, 1200);
-    } else {
-      msgDiv.innerText = '❌ لطفاً ابتدا عضو کانال شوید.';
-    }
-  });
+document.getElementById('continue-btn').addEventListener('click', function(){
+    // کاربر را بدون نیاز به عضویت واقعی هدایت می‌کنیم
+    localStorage.setItem('joinedChannel', 'true'); 
+    window.location.href = 'quiz.html';
+});
 </script>
+
 </body>
 </html>
