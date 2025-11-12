@@ -1,43 +1,99 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نتیجه مسابقه</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  body {
+    font-family: Vazirmatn, sans-serif;
+    direction: rtl;
+    text-align: center;
+    background: linear-gradient(180deg,#061d32,#0b223f);
+    color: #fff;
+    padding: 40px 15px;
+  }
+  .result-card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,255,224,0.12);
+  }
+  h2 { color: #00ffe0; margin-bottom: 15px; }
+  .score { font-size: 1.6rem; margin: 10px 0; color: #cfffdf; font-weight: bold; }
+  .rank { font-size: 1.2rem; color: #ffd; margin-bottom: 15px; }
+  .reward { background: rgba(0,255,224,0.08); padding: 10px; border-radius: 10px; margin-bottom: 15px; color: #aaffff; }
+  button {
+    background: #00ffe0;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    transition: .2s;
+  }
+  button:hover { background: #00ffb0; }
+</style>
 </head>
 <body>
-  <div class="background-main">
-    <div class="neon-box result-box">
-      <h1>🎉 تبریک! 🎉</h1>
-      <p>امتیاز نهایی شما:</p>
-      <h2 id="final-score">0</h2>
-
-      <div class="user-banner">
-        <img id="banner-character" src="" alt="کاراکتر">
-        <p id="banner-text">بنر اختصاصی شما — خوش آمدید!</p>
-      </div>
-
-      <div class="share-box">
-        <p>لینک دعوت اختصاصی شما:</p>
-        <input id="final-invite" readonly>
-        <button onclick="location.href='index.html'">بازگشت به صفحه اصلی</button>
-      </div>
-    </div>
+  <div class="result-card">
+    <h2>🎯 نتیجه مسابقه</h2>
+    <div id="scoreDisplay" class="score"></div>
+    <div id="rankDisplay" class="rank"></div>
+    <div id="rewardBox" class="reward"></div>
+    <button id="retryBtn">🔁 شرکت دوباره</button>
+    <button id="exitBtn">🏠 بازگشت به صفحه اصلی</button>
   </div>
 
 <script>
-const final = localStorage.getItem('finalScore') || 0;
-document.getElementById('final-score').innerText = final;
+  const score = Number(localStorage.getItem('ongoingScore') || 0);
+  const totalQ = JSON.parse(localStorage.getItem('quizConfig') || '{}').questions?.length || 10;
 
-// نمایش کاراکتر در بنر
-const ch = localStorage.getItem('selectedCharacter') || 'female';
-document.getElementById('banner-character').src = `assets/images/character_${ch}.jpeg`;
+  const scoreEl = document.getElementById('scoreDisplay');
+  const rankEl = document.getElementById('rankDisplay');
+  const rewardEl = document.getElementById('rewardBox');
 
-// لینک اختصاصی
-const userId = localStorage.getItem('userInviteId') || Math.floor(Math.random()*900000+100000);
-localStorage.setItem('userInviteId', userId);
-document.getElementById('final-invite').value = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/') + 'quiz.html?ref=' + userId;
+  // نمایش امتیاز
+  scoreEl.innerText = `امتیاز شما: ${score} از ${totalQ * 5}`;
+
+  // محاسبه رتبه تقریبی
+  let rank = 'شرکت‌کننده';
+  let reward = 'متشکریم از حضور شما 🌷';
+
+  if(score >= totalQ * 5 * 0.9){
+    rank = '🥇 رتبه اول';
+    reward = 'تبریک! شما برنده جایزه ویژه مسابقه شدید 🎁';
+  } else if(score >= totalQ * 5 * 0.75){
+    rank = '🥈 رتبه دوم';
+    reward = 'خیلی عالی! شما در بین نفرات برتر هستید 🏅';
+  } else if(score >= totalQ * 5 * 0.6){
+    rank = '🥉 رتبه سوم';
+    reward = 'عملکرد خوب! شما در جمع برگزیدگان مسابقه قرار دارید 👏';
+  } else if(score >= totalQ * 5 * 0.3){
+    rank = '✅ شرکت‌کننده فعال';
+    reward = 'ادامه بده! نزدیک به برنده شدن هستی 💪';
+  }
+
+  rankEl.innerText = rank;
+  rewardEl.innerText = reward;
+
+  // دکمه‌ها
+  document.getElementById('retryBtn').onclick = ()=>{
+    localStorage.removeItem('ongoingScore');
+    localStorage.removeItem('currentQuestion');
+    window.location.href = 'quiz.html';
+  };
+
+  document.getElementById('exitBtn').onclick = ()=>{
+    localStorage.removeItem('ongoingScore');
+    localStorage.removeItem('currentQuestion');
+    window.location.href = 'index.html';
+  };
 </script>
 </body>
 </html>
