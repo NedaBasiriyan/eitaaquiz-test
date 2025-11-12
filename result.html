@@ -7,50 +7,87 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="background-main">
 
-<div class="background-main">
-  <main class="center-area">
-    <div class="neon-box result-box">
+    <!-- بالای صفحه: لوگو -->
+    <div class="top-header">
+      <img class="logo" src="assets/images/logo-main.png" alt="لوگو">
+    </div>
+
+    <!-- ناحیه نتیجه -->
+    <main class="result-box neon-box">
       <h1>🎉 تبریک! 🎉</h1>
       <p>امتیاز نهایی شما: <span id="final-score">0</span></p>
+      <p id="rank-text"></p>
       
+      <!-- بنر کاراکتر -->
       <div class="user-banner">
         <img id="banner-character" src="" alt="کاراکتر">
         <p id="banner-text">بنر اختصاصی شما — خوش آمدید!</p>
       </div>
 
-      <div id="reward-message" style="margin:12px 0; font-weight:600; color:lightgreen;"></div>
-
-      <div class="share-box">
-        <p>لینک دعوت اختصاصی شما:</p>
+      <!-- دعوت از دوستان -->
+      <div class="invite-box neon-box">
+        <p>برای کسب امتیاز بیشتر، لینک اختصاصی دعوت خود را به دوستان بدهید:</p>
         <input id="final-invite" readonly>
-        <button onclick="location.href='index.html'">بازگشت به صفحه اصلی</button>
+        <button id="copy-invite" class="btn-small">کپی لینک</button>
+        <p id="ref-count"></p>
       </div>
-    </div>
-  </main>
-</div>
 
-<script>
-(function(){
-  const score = Number(localStorage.getItem('finalScore') || 0);
-  document.getElementById('final-score').innerText = score;
+      <!-- بازگشت به صفحه اصلی -->
+      <div style="margin-top:16px;">
+        <button onclick="location.href='index.html'" class="btn-primary">بازگشت به صفحه اصلی</button>
+      </div>
+    </main>
 
-  const ch = localStorage.getItem('selectedCharacter') || 'female';
-  document.getElementById('banner-character').src = `assets/images/character_${ch}.jpeg`;
+  </div>
 
-  // پیام جایزه براساس رتبه نمونه
-  let rewardText = '';
-  if(score >= 25) rewardText = '🏆 تبریک! شما جزو نفرات برتر هستید و جایزه دریافت می‌کنید!';
-  else if(score >= 15) rewardText = '🎖 عالی! نزدیک به نفرات برتر!';
-  else rewardText = '✅ امتیاز شما ثبت شد. برای جایزه بیشتر در مسابقات بعدی تلاش کنید!';
-  document.getElementById('reward-message').innerText = rewardText;
+  <script>
+    // نمایش امتیاز نهایی
+    const finalScore = localStorage.getItem('finalScore') || 0;
+    document.getElementById('final-score').innerText = finalScore;
 
-  // لینک دعوت
-  const userInviteId = localStorage.getItem('userInviteId') || Math.floor(Math.random()*900000+100000);
-  localStorage.setItem('userInviteId', userInviteId);
-  document.getElementById('final-invite').value = `${window.location.origin}/quiz.html?ref=${userInviteId}`;
-})();
-</script>
+    // نمایش کاراکتر انتخاب‌شده
+    const selectedCharacter = localStorage.getItem('selectedCharacter') || 'female';
+    document.getElementById('banner-character').src = `assets/images/character_${selectedCharacter}.jpeg`;
 
+    // تعیین رتبه فرضی برای نفرات اول تا سوم
+    let rankText = '';
+    if(finalScore >= 25){
+      rankText = '🥇 تبریک! شما نفر اول مسابقه هستید و جایزه دریافت می‌کنید!';
+    } else if(finalScore >= 20){
+      rankText = '🥈 آفرین! شما نفر دوم هستید.';
+    } else if(finalScore >= 15){
+      rankText = '🥉 عالی! شما نفر سوم هستید.';
+    } else {
+      rankText = '💡 با امتیاز کسب شده، تمرین و تلاش بیشتری برای رتبه‌های بالاتر داشته باشید!';
+    }
+    document.getElementById('rank-text').innerText = rankText;
+
+    // لینک دعوت اختصاصی
+    let userInviteId = localStorage.getItem('userInviteId');
+    if(!userInviteId){
+      userInviteId = Math.floor(Math.random()*900000+100000).toString();
+      localStorage.setItem('userInviteId', userInviteId);
+    }
+    const inviteInput = document.getElementById('final-invite');
+    inviteInput.value = window.location.origin + window.location.pathname.replace(/[^/]*$/,'') + 'quiz.html?ref=' + userInviteId;
+
+    // نمایش تعداد افرادی که با لینک کاربر عضو شده‌اند
+    const referrals = JSON.parse(localStorage.getItem('referrals')||'{}');
+    const refCount = referrals[userInviteId] || 0;
+    document.getElementById('ref-count').innerText = `تعداد افرادی که با لینک شما عضو شدند: ${refCount}`;
+
+    // دکمه کپی لینک
+    document.getElementById('copy-invite').addEventListener('click', ()=>{
+      inviteInput.select();
+      inviteInput.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert('لینک دعوت کپی شد!');
+    });
+
+    // پاک‌کردن داده‌های موقت (optional)
+    localStorage.removeItem('ongoingScore');
+  </script>
 </body>
 </html>
