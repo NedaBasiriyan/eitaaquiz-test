@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap');
+/* style.css — فونت فارسی Vazirmatn و سبک مدرن، حفظ کادر نئونی و بک‌گراند */
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
 
 :root{
   --bg-dark:#071317;
@@ -71,16 +73,16 @@ html,body{height:100%;margin:0;font-family:'Vazirmatn', Tahoma, sans-serif;direc
 
 /* ناحیه مسابقه */
 .quiz-area{display:flex;gap:18px;align-items:flex-start;justify-content:center;padding:24px;flex-wrap:wrap}
-.question-card{width:640px;text-align:right;padding:22px}
+.question-card{width:640px;text-align:right;padding:22px;background:rgba(0,0,0,0.35);border-radius:12px}
 .question-card h3{margin:0 0 14px;font-size:1.25rem;color:#eafff9}
 .answers-list{display:flex;flex-direction:column;gap:10px}
-.answers-list button{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-align:right;transition:all .18s}
+.answers-list button{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-align:right;transition:all .18s;color:#eafff9}
 .answers-list button:hover{transform:scale(1.02);box-shadow:0 0 8px rgba(34,240,223,0.08)}
 .answers-list button.correct{background:rgba(0,255,0,0.18);border-color:rgba(0,255,0,0.4)}
 .answers-list button.wrong{background:rgba(255,0,0,0.16);border-color:rgba(255,0,0,0.4)}
 
 /* invite box */
-.invite-box{width:320px;padding:14px}
+.invite-box{width:320px;padding:14px;background:rgba(0,0,0,0.35);border-radius:12px}
 .invite-box input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#eafffb;margin-bottom:8px}
 
 /* نتیجه / بنر */
