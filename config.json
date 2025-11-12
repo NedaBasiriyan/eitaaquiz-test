@@ -1,40 +1,63 @@
 {
-  "channels": [
-    {
-      "id": "@hamserr",
-      "invite": "https://eitaa.com/hamserr"
-    }
+  "quizTitle": "مسابقه حقوقی هم سرّ",
+  "welcomeText": [
+    "خوش آمدید به مسابقه حقوقی هم سرّ!",
+    "در این مسابقه می‌توانید دانش حقوقی خود را محک بزنید و جوایز ارزشمند دریافت کنید."
+  ],
+  "instructions": [
+    "با دعوت از دوستان خود امتیاز دریافت کنید.",
+    "هر پاسخ درست به شما امتیاز می‌دهد و پاسخ غلط هیچ امتیازی ندارد.",
+    "کاراکتر دلخواه خود را انتخاب کنید تا تجربه شخصی‌سازی شده داشته باشید."
   ],
   "questions": [
     {
-      "text": "طلاق چه شرایطی دارد؟",
-      "options": ["شرایط الف", "شرایط ب", "شرایط ج", "شرایط د"],
+      "question": "حق طلاق در قانون ایران به چه کسی تعلق دارد؟",
+      "options": ["زن", "مرد", "هر دو", "هیچ کدام"],
+      "answer": 1,
+      "score": 10
+    },
+    {
+      "question": "مهریه چه زمانی قابل مطالبه است؟",
+      "options": ["بعد از عقد", "بعد از طلاق", "در زمان عقد", "هیچ وقت"],
+      "answer": 1,
+      "score": 10
+    },
+    {
+      "question": "نفقه شامل چه مواردی می‌شود؟",
+      "options": ["غذا و پوشاک", "تفریح و سفر", "خانه و ماشین", "تمام موارد"],
       "answer": 0,
-      "points": 10
+      "score": 10
     },
     {
-      "text": "مهریه چیست؟",
-      "options": ["پول نقد", "هدیه", "مال غیر نقدی", "همه موارد"],
+      "question": "خیانت زوج چه تبعات حقوقی دارد؟",
+      "options": ["هیچ", "حق طلاق برای زن", "پرداخت دیه", "تمام موارد"],
       "answer": 3,
-      "points": 10
+      "score": 10
     },
     {
-      "text": "نفقه چه کسی بر عهده است؟",
-      "options": ["شوهر", "زن", "پدر", "همه"],
-      "answer": 0,
-      "points": 10
-    },
-    {
-      "text": "خیانت چه اثری دارد؟",
-      "options": ["حقوقی", "مجازات کیفری", "هیچکدام", "هر دو اولی"],
-      "answer": 3,
-      "points": 10
-    },
-    {
-      "text": "میانجیگری چه تاثیری دارد؟",
-      "options": ["صلح", "سازش", "کمک به حل مشکل", "همه موارد"],
-      "answer": 3,
-      "points": 10
+      "question": "میانجیگری برای حل اختلافات مالی توسط چه کسی انجام می‌شود؟",
+      "options": ["قاضی", "وکیل", "میانجی رسمی", "دادستان"],
+      "answer": 2,
+      "score": 10
     }
-  ]
+  ],
+  "channels": [
+    {
+      "name": "هم سرّ",
+      "username": "hamserr",
+      "inviteLink": "https://eitaa.com/hamserr"
+    }
+  ],
+  "rewards": [
+    "لوح تقدیر",
+    "جوایز نقدی",
+    "امتیازهای ویژه"
+  ],
+  "font": "Vazirmatn, sans-serif",
+  "backgroundMain": "assets/images/background_main.jpg",
+  "characterFemale": "assets/images/character_female.jpeg",
+  "characterMale": "assets/images/character_male.jpeg",
+  "logoMain": "assets/images/logo-main.png",
+  "logoMinimal": "assets/images/logo-minimal.png",
+  "questionBg": "assets/images/question_bg.jpeg"
 }
