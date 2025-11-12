@@ -1,39 +1,47 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>انتخاب کاراکتر</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="background-main">
-  <div class="character-row">
-    <div class="character-card">
-      <img src="assets/images/character_female.jpeg" alt="کاراکتر زن" onclick="selectCharacter('female')" id="female-img">
-      <p>زن</p>
-    </div>
-    <div class="character-card">
-      <img src="assets/images/character_male.jpeg" alt="کاراکتر مرد" onclick="selectCharacter('male')" id="male-img">
-      <p>مرد</p>
-    </div>
+<body class="background-main">
+
+<div class="top-header">
+  <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
+</div>
+
+<div class="character-row">
+  <div class="character-card" data-character="female">
+    <img src="assets/images/character_female.jpeg" alt="زن">
+    <p>زن</p>
   </div>
-  <div class="bottom-box neon-box">
-    <p class="info">کاراکتر خود را انتخاب کنید تا تجربه‌ی مسابقه شخصی‌سازی شود.</p>
+  <div class="character-card" data-character="male">
+    <img src="assets/images/character_male.jpeg" alt="مرد">
+    <p>مرد</p>
   </div>
 </div>
+
+<div class="bottom-box neon-box">
+  <p class="info">کاراکتر خود را انتخاب کنید تا تجربه‌ی مسابقه برای شما شخصی‌سازی شود.</p>
+  <p class="hint">پس از انتخاب، به مرحله بعد هدایت می‌شوید.</p>
+</div>
+
 <script>
-function selectCharacter(type){
-  localStorage.setItem('selectedCharacter', type);
-  localStorage.setItem('hasSelectedCharacter', '1');
-  window.location.href = 'quiz.html';
-}
-document.querySelectorAll('.character-card img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    document.querySelectorAll('.character-card img').forEach(i => i.classList.remove('selected'));
+const cards = document.querySelectorAll('.character-card');
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    cards.forEach(c=>c.querySelector('img').classList.remove('selected'));
+    const img = card.querySelector('img');
     img.classList.add('selected');
+    const selected = card.dataset.character;
+    localStorage.setItem('selectedCharacter', selected);
+    // بعد از نیم ثانیه هدایت به صفحه عضویت
+    setTimeout(()=>{ window.location.href='join.html'; }, 500);
   });
 });
 </script>
+
 </body>
 </html>
