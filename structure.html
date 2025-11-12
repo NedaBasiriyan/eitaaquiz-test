@@ -1,114 +1,24 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ساختار و جوایز مسابقه</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Vazirmatn', sans-serif;
-      background: url('assets/images/background_main.jpg') no-repeat center center/cover;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      text-align: center;
-      padding: 20px;
-    }
-    .title {
-      margin-top: 30px;
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(255,255,255,0.4);
-      animation: fadeIn 1.2s ease-in;
-    }
-    .card {
-      background: rgba(0,0,0,0.45);
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid rgba(0,255,255,0.25);
-      box-shadow: 0 0 20px rgba(0,255,255,0.15);
-      width: 90%;
-      max-width: 400px;
-      text-align: right;
-      line-height: 1.9;
-      font-size: 0.95rem;
-      animation: fadeInUp 1.4s ease;
-    }
-    .neon-btn {
-      width: 85%;
-      max-width: 320px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 2px solid #0ff;
-      box-shadow: 0 0 12px #0ff6;
-      background: rgba(0,0,0,0.35);
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 20px 0;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-      animation: fadeInUp 1.6s ease;
-    }
-    .neon-btn:hover {
-      background: rgba(0,255,255,0.1);
-      transform: translateY(-2px);
-    }
-    .rewards {
-      margin: 10px 0;
-      padding: 10px 12px;
-      background: rgba(0,255,255,0.05);
-      border-radius: 14px;
-      border: 1px solid rgba(0,255,255,0.2);
-    }
-    footer {
-      margin-bottom: 15px;
-      font-size: 0.85rem;
-      opacity: 0.8;
-    }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>مسابقه حقوقی - خوش‌آمد</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="background-main">
+  <header class="top-header">
+    <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
+  </header>
 
-  <div class="title">ساختار و جوایز مسابقه</div>
+  <main class="center-area"></main>
 
-  <div class="card">
-    <p>👋 شرکت در مسابقه حقوقی دکتر قهرمان فرصتی است برای سنجش دانش حقوقی و برنده شدن جوایز ارزشمند.</p>
-
-    <div class="rewards">
-      🏆 <strong>جوایز مسابقه:</strong><br>
-      نفر اول: ۵۰۰,۰۰۰ تومان<br>
-      نفر دوم: ۲۰۰,۰۰۰ تومان<br>
-      نفرات سوم تا دهم: هر نفر ۱۰۰,۰۰۰ تومان
-    </div>
-
-    <p>🔹 با پاسخ دادن به سوالات و دعوت دوستان، امتیاز بیشتری بگیرید.<br>
-    🔹 هر عضویت جدید از طریق بنر اختصاصی شما = ۱ امتیاز.<br>
-    🔹 پاسخ درست به سوالات = ۵ امتیاز.</p>
-
-    <p>🎯 هدف مسابقه: افزایش آگاهی حقوقی و ترویج فرهنگ صلح و سازش.</p>
-  </div>
-
-  <div id="goJoin" class="neon-btn">رفتن به مرحله عضویت در کانال</div>
-
-  <footer>© 2025 مسابقه حقوقی دکتر قهرمان</footer>
-
-  <script>
-    const btn = document.getElementById('goJoin');
-    btn.addEventListener('click', ()=>{
-      window.location.href = 'join.html';
-    });
-  </script>
-
+  <footer class="bottom-box neon-box">
+    <h1>به مسابقه حقوقی دکتر قهرمان خوش آمدید</h1>
+    <p>در مسابقه شرکت کنید، امتیاز جمع کنید و برنده جوایز شوید.</p>
+    <a class="btn-primary" href="structure.html">شروع مسابقه</a>
+  </footer>
+</div>
 </body>
 </html>
