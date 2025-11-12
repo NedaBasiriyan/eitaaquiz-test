@@ -1,6 +1,36 @@
 {
-  "app_id": "71111142",
-  "app_token": "PASTE_YOUR_APP_TOKEN_HERE",
-  "linked_miniprogram": "https://eitaayar.ir/admin/app/71111142/m/1156",
-  "channel": "@Hamserr"
+  "mandatoryChannels": [
+    "https://eitaa.com/hamserr"
+  ],
+  "characters": [
+    "assets/images/character_male.jpeg",
+    "assets/images/character_female33.jpeg"
+  ],
+  "questions": [
+    {
+      "question": "طلاق در چه شرایطی قانونی است؟",
+      "options": ["با رضایت طرفین", "فقط توسط مرد", "با حکم دادگاه", "همیشه غیرقانونی"],
+      "answer": 2
+    },
+    {
+      "question": "مهریه شامل چه مواردی می‌شود؟",
+      "options": ["نقدی", "عین معین", "ترکیبی", "هیچکدام"],
+      "answer": 2
+    },
+    {
+      "question": "نفقه زن شامل چه مواردی می‌شود؟",
+      "options": ["مسکن و خوراک", "تفریح و سفر", "وسایل لوکس", "همه موارد"],
+      "answer": 0
+    },
+    {
+      "question": "در صورت خیانت، چه اقدامی قانونی است؟",
+      "options": ["شکایت در دادگاه", "خودسرانه اقدام", "سازش خانوادگی", "هیچکدام"],
+      "answer": 0
+    },
+    {
+      "question": "منازعات مالی خانواده چگونه حل می‌شوند؟",
+      "options": ["میانجیگری", "دعوای عمومی", "توطئه", "بی‌اقدامی"],
+      "answer": 0
+    }
+  ]
 }
