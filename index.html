@@ -5,19 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مسابقه حقوقی ایتا</title>
 <link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
 </head>
-<body>
-<div class="background-main">
-  <div class="welcome-card">
-    <h1>خوش آمدید به مسابقه حقوقی!</h1>
-    <p>برای شروع، لطفاً یک کاراکتر انتخاب کنید:</p>
-    <div class="character-selection">
-      <img src="assets/images/character_male.jpeg" alt="مرد" onclick="selectCharacter('male')">
-      <img src="assets/images/character_female33.jpeg" alt="زن" onclick="selectCharacter('female')">
-    </div>
-    <button id="startBtn" onclick="goToMembership()">شروع مسابقه</button>
+<body style="background-image: url('assets/images/background_main.jpg');">
+  <div class="page neon-box">
+    <img src="assets/images/logo.png" alt="لوگو" class="logo">
+    <h1 class="neon-text">به مسابقه حقوقی هم‌سرّ خوش آمدید!</h1>
+    <p class="neon-text">دانش خود را بیازمایید و جایزه بگیرید 🎁</p>
+    <button class="neon-button" onclick="window.location.href='character.html'">شروع مسابقه</button>
   </div>
-</div>
 </body>
 </html>
