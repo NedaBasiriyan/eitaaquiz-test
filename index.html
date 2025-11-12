@@ -4,54 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مسابقه هوش ایتا</title>
-    <!-- فونت فارسی مدرن -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@latest/dist/font-face.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+    <header class="neon">
+        <img src="assets/images/logo-main.png" alt="لوگو مسابقه" class="logo">
+        <h1>مسابقه هوش ایتا</h1>
+    </header>
 
-    <!-- پیام دعوت -->
-    <section class="card neon">
-        <h1>سلام علی!</h1>
-        <p>حسن تو را برای شرکت در مسابقه حقوقی کانال دکتر قهرمان دعوت کرده است.</p>
-        <p>برای شروع مسابقه، ابتدا عضویت در کانال <strong>@Hamserr</strong> الزامی است.</p>
-        <button id="joinChannelBtn">عضویت در کانال و ادامه مسابقه</button>
-    </section>
+    <main>
+        <!-- پیام دعوت -->
+        <section class="card neon">
+            <h2>سلام علی!</h2>
+            <p>حسن تو را برای شرکت در مسابقه حقوقی کانال دکتر قهرمان دعوت کرده است.</p>
+            <p>برای شروع مسابقه باید عضو کانال شوید:</p>
+            <a href="https://t.me/Hamserr" target="_blank" class="btn">عضویت در کانال</a>
+        </section>
 
-    <!-- جوایز مسابقه -->
-    <section class="card neon">
-        <h2>جوایز مسابقه</h2>
-        <ul>
-            <li>نفر اول: ۵۰۰ هزار تومان</li>
-            <li>نفر دوم: ۲۰۰ هزار تومان</li>
-            <li>۸ نفر بعدی: هر کدام ۱۰۰ هزار تومان</li>
-        </ul>
-    </section>
+        <!-- جوایز -->
+        <section class="card neon">
+            <h2>جوایز مسابقه</h2>
+            <ul>
+                <li>نفر اول: ۵۰۰ هزار تومان</li>
+                <li>نفر دوم: ۲۰۰ هزار تومان</li>
+                <li>۸ نفر بعدی: هر کدام ۱۰۰ هزار تومان</li>
+            </ul>
+        </section>
 
-    <!-- شرایط شرکت -->
-    <section class="card neon">
-        <h2>شرایط شرکت</h2>
-        <ol>
-            <li>عضویت در کانال الزامی است</li>
-            <li>افزایش امتیاز از دو طریق:
-                <ul>
-                    <li>فرستادن بنر به دیگران و عضویت آن‌ها در کانال</li>
-                    <li>پاسخ‌دهی به سوالات مسابقه</li>
-                </ul>
-            </li>
-        </ol>
-    </section>
+        <!-- شرایط -->
+        <section class="card neon">
+            <h2>شرایط شرکت</h2>
+            <ol>
+                <li>عضویت در کانال</li>
+                <li>افزایش امتیاز از دو طریق:
+                    <ul>
+                        <li>فرستادن بنر به دیگران و عضویت آن‌ها</li>
+                        <li>پاسخ‌دهی به سوالات مسابقه</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
 
-    <!-- مراحل شروع -->
-    <section class="card neon">
-        <h2>شروع مسابقه</h2>
-        <p>برای ادامه، روی دکمه زیر کلیک کنید و عضویت خود را تأیید کنید.</p>
-        <button id="startQuizBtn" disabled>شروع مسابقه</button>
-    </section>
+        <!-- راهنمای مسابقه -->
+        <section class="card neon" id="userPosition">
+            <h2>جایگاه شما: نفر ۱۲</h2>
+            <p>امتیاز شما: <span id="userScore">0</span></p>
+            <button id="getBanner" class="btn">دریافت بنر اختصاصی برای دعوت</button>
+            <div id="bannerLink" style="display:none; margin-top:10px;">
+                <input type="text" id="userBanner" readonly>
+                <button id="copyBanner" class="btn">کپی لینک</button>
+            </div>
+        </section>
 
-</div>
+        <!-- شروع مسابقه -->
+        <section class="card neon">
+            <button id="startQuiz" class="btn">شروع مسابقه</button>
+        </section>
 
-<script src="script.js"></script>
+        <!-- بخش سوالات -->
+        <section class="card neon" id="quizSection" style="display:none;">
+            <h2>سوالات مسابقه</h2>
+            <div id="questions"></div>
+            <button id="finishQuiz" class="btn">پایان مسابقه</button>
+        </section>
+
+        <!-- نتایج -->
+        <section class="card neon" id="resultsSection" style="display:none;">
+            <h2>نتایج مسابقه</h2>
+            <div id="results"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
