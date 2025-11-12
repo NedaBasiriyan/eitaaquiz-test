@@ -1,83 +1,29 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عضویت در کانال</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "ScheherazadeNew", sans-serif;
-      background: linear-gradient(to bottom, #4fc1e9, #2a9fd6);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      direction: rtl;
-    }
-
-    .container {
-      background-color: rgba(0,0,0,0.6);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 15px;
-      font-size: 18px;
-      color: #fff;
-      background-color: #ff9800;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .btn:hover {
-      background-color: #e68900;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عضویت اجباری کانال</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>مرحله عضویت</h1>
-    <p>برای شرکت در مسابقه ابتدا در کانال زیر عضو شوید:</p>
-    <a class="btn" href="https://eitaa.com/YourChannel" target="_blank">باز کردن کانال</a>
-    <button class="btn" id="confirmBtn">تایید عضویت و ادامه</button>
-  </div>
-
-  <script>
-    // بررسی عضویت شبیه‌سازی شده با localStorage
-    document.getElementById('confirmBtn').addEventListener('click', function() {
-      localStorage.setItem('membershipConfirmed', 'true');
-      // انتقال به صفحه سوالات
-      window.location.href = 'questions.html';
-    });
-
-    // اگر قبلاً عضویت تایید شده، مستقیماً به سوالات هدایت شود
-    if(localStorage.getItem('membershipConfirmed') === 'true') {
-      window.location.href = 'questions.html';
-    }
-  </script>
+<div class="container">
+    <header>
+        <img src="assets/logos/logo.png" alt="لوگو" class="logo">
+        <h1>برای ادامه مسابقه، ابتدا عضو کانال شوید</h1>
+    </header>
+    <main>
+        <div class="membership-box">
+            <p>👨‍👩‍👧 طلاق، مهریه، نفقه، خیانت و منازعات مالی و ...</p>
+            <p>🔺️دکتر قهرمان مشاور رسمی دادگستری</p>
+            <p>✅ میانجیگری برای صلح و سازش</p>
+            <p>آیدی رزرو وقت: <strong>@m_ghahraman</strong></p>
+            <p>رضایتمندی‌ها: <strong>@rezayathamserr</strong></p>
+            <a href="https://eitaa.com/tab_hamserr" target="_blank" class="join-channel-btn">عضویت در کانال</a>
+        </div>
+        <button id="checkMembership" class="next-btn">تایید و ادامه</button>
+    </main>
+</div>
+<script src="js/script.js"></script>
 </body>
 </html>
