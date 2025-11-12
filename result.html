@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نتیجه مسابقه</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="background-main">
-  <div class="neon-box result-box">
-    <h2>نتیجه شما</h2>
-    <p>امتیاز شما: <span id="final-score"></span></p>
-    <p>لینک اختصاصی برای دعوت از دوستانتان:</p>
-    <input type="text" id="invite-link" readonly>
-  </div>
+<div class="neon-box result-box">
+  <h2>نتیجه شما</h2>
+  <p>امتیاز شما: <span id="final-score"></span></p>
+  <p>لینک اختصاصی برای دعوت از دوستانتان:</p>
+  <input type="text" id="invite-link" readonly>
 </div>
 <script>
 let score = localStorage.getItem('finalScore') || 0;
 document.getElementById('final-score').innerText = score;
 let userId = Math.floor(Math.random()*10000);
-document.getElementById('invite-link').value = window.location.href + "?ref=" + userId;
+document.getElementById('invite-link').value = window.location.href.replace('result.html','quiz.html') + "?ref=" + userId;
 </script>
-</body>
-</html>
