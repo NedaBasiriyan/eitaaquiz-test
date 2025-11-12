@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دعوت از دوستان</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>دعوت از دوستان - مسابقه حقوقی</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="background-main">
 
-    <div class="top-header">
-      <img class="logo" src="assets/images/logo-main.png" alt="لوگو">
-    </div>
+    <!-- لوگو بالای صفحه -->
+    <header class="top-header">
+      <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
+    </header>
 
-    <main class="quiz-area neon-box">
-      <h1>🎯 دعوت از دوستان</h1>
-      <p>برای کسب امتیاز بیشتر، لینک زیر را به دوستانتان بدهید:</p>
-      <input readonly id="invite-link">
-      <button id="copy-invite" class="btn-small">کپی لینک</button>
-      <p id="ref-count"></p>
+    <!-- محتوا -->
+    <main class="center-area">
+      <section class="invite-section neon-box">
+        <h2>دعوت از دوستان و افزایش امتیاز</h2>
+        <p>با دعوت از دوستان و عضویت آن‌ها در کانال، امتیاز خود را افزایش دهید و شانس برنده شدن خود را بیشتر کنید!</p>
 
-      <div style="margin-top:20px;">
-        <button onclick="location.href='index.html'" class="btn-primary">بازگشت به صفحه اصلی</button>
-      </div>
+        <h3>چگونه امتیاز کسب کنیم:</h3>
+        <ul>
+          <li>هر دعوت موفق = ۱ امتیاز</li>
+          <li>پاسخ‌دهی به سوالات = امتیاز بیشتر</li>
+        </ul>
+
+        <h3>بنر اختصاصی شما:</h3>
+        <div class="share-banner neon-box">
+          <p>لینک اختصاصی خود را کپی کنید و به دوستان ارسال کنید تا امتیاز دریافت کنید:</p>
+          <input type="text" value="https://eitaaquiz-test.com/referral/USERID" readonly id="referralLink">
+          <button onclick="copyLink()">کپی لینک</button>
+        </div>
+
+        <a class="btn-primary" href="membership.html">ادامه و عضویت در کانال</a>
+      </section>
     </main>
 
-    <script>
-      let userInviteId = localStorage.getItem('userInviteId');
-      if(!userInviteId){
-        userInviteId = Math.floor(Math.random()*900000+100000).toString();
-        localStorage.setItem('userInviteId', userInviteId);
-      }
-
-      const inviteInput = document.getElementById('invite-link');
-      inviteInput.value = window.location.origin + window.location.pathname.replace(/[^/]*$/,'') + 'quiz.html?ref=' + userInviteId;
-
-      const referrals = JSON.parse(localStorage.getItem('referrals')||'{}');
-      const refCount = referrals[userInviteId] || 0;
-      document.getElementById('ref-count').innerText = `تعداد افرادی که با لینک شما عضو شدند: ${refCount}`;
-
-      document.getElementById('copy-invite').addEventListener('click', ()=>{
-        inviteInput.select();
-        inviteInput.setSelectionRange(0, 99999);
-        document.execCommand('copy');
-        alert('لینک دعوت کپی شد!');
-      });
-    </script>
-
   </div>
+
+  <script>
+    function copyLink() {
+      const link = document.getElementById("referralLink");
+      link.select();
+      link.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(link.value);
+      alert("لینک شما کپی شد!");
+    }
+  </script>
 </body>
 </html>
