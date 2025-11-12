@@ -8,27 +8,27 @@
 </head>
 <body class="background-main">
 
-<header class="top-header">
-  <img class="logo" src="assets/images/logo-main.png" alt="لوگو مسابقه">
-</header>
-
-<main class="center-area">
+<div class="center-area">
   <div class="neon-box">
-    <h1>👋 برای شرکت در مسابقه</h1>
-    <p>ابتدا می‌توانید کانال رسمی مسابقه را مشاهده کنید:</p>
+    <h2>برای شرکت در مسابقه ابتدا در کانال رسمی زیر عضو شوید:</h2>
+    <p>@hamserr</p>
+    <p>👨‍👩‍👧 طلاق، مهریه، نفقه، میانجیگری، مشاوره حقوقی — دکتر قهرمان</p>
 
-    <a class="btn-secondary" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">باز کردن کانال</a>
+    <div class="join-actions">
+      <a class="btn-secondary" id="open-channel" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">باز کردن صفحه کانال</a>
+      <button class="btn-primary" id="confirm-joined">✅ ادامه مسابقه</button>
+    </div>
 
-    <p>پس از مشاهده، روی دکمه زیر کلیک کنید تا وارد مسابقه شوید:</p>
-    <button class="btn-primary" id="continue-btn">✅ ادامه مسابقه</button>
+    <p class="note">
+      پس از باز کردن لینک کانال و عضویت، برگردید و روی «ادامه مسابقه» کلیک کنید.
+    </p>
   </div>
-</main>
+</div>
 
 <script>
-document.getElementById('continue-btn').addEventListener('click', function(){
-    // کاربر را بدون نیاز به عضویت واقعی هدایت می‌کنیم
-    localStorage.setItem('joinedChannel', 'true'); 
-    window.location.href = 'quiz.html';
+document.getElementById('confirm-joined').addEventListener('click', () => {
+  localStorage.setItem('joinedChannel', 'true');
+  window.location.href = 'quiz.html';
 });
 </script>
 
