@@ -1,160 +1,103 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>پنل مدیریت مسابقه</title>
 <link rel="stylesheet" href="style.css">
-<style>
-  body { font-family: Vazirmatn, sans-serif; background: #0a192f; color: #fff; margin:0; padding:0;}
-  .container { max-width: 900px; margin: auto; padding: 20px;}
-  h1 { text-align: center; color: #00ffe0; }
-  label { display:block; margin:10px 0 5px; }
-  input, textarea, select { width:100%; padding:8px; margin-bottom:10px; border-radius:5px; border:none; }
-  button { padding:10px 15px; margin:5px 0; border:none; border-radius:5px; background:#00ffe0; color:#000; font-weight:bold; cursor:pointer;}
-  table { width:100%; border-collapse: collapse; margin-top:20px;}
-  th, td { border:1px solid #00ffe0; padding:8px; text-align:center; }
-  th { background: rgba(0,255,224,0.1); }
-  .danger { background:#ff4c4c; color:#fff; }
-</style>
 </head>
 <body>
-<div class="container">
-  <h1>پنل مدیریت مسابقه</h1>
+  <div class="background-main">
+    <div class="neon-box admin-box">
+      <h2>پنل مدیریت</h2>
+      <p>تنظیمات کانال و سوالات را اینجا مدیریت کنید.</p>
 
-  <!-- 🔹 تنظیمات جوایز -->
-  <section>
-    <h2>جوایز نفرات برتر</h2>
-    <label>نفر اول (تومان):</label>
-    <input type="number" id="prize1" placeholder="500000">
-    <label>نفر دوم (تومان):</label>
-    <input type="number" id="prize2" placeholder="200000">
-    <label>نفر سوم (تومان):</label>
-    <input type="number" id="prize3" placeholder="100000">
-    <button onclick="savePrizes()">ذخیره جوایز</button>
-  </section>
-
-  <!-- 🔹 افزودن سوال -->
-  <section>
-    <h2>سوالات مسابقه</h2>
-    <label>متن سوال:</label>
-    <textarea id="questionText" rows="2"></textarea>
-    <label>گزینه‌ها (با کاما جدا کنید):</label>
-    <input type="text" id="questionOptions" placeholder="گزینه1, گزینه2, گزینه3, گزینه4">
-    <label>شماره گزینه درست (0 تا 3):</label>
-    <input type="number" id="correctIndex" min="0" max="3">
-    <label>امتیاز سوال:</label>
-    <input type="number" id="questionScore" value="5">
-    <button onclick="addQuestion()">افزودن سوال</button>
-  </section>
-
-  <!-- 🔹 لیست سوالات -->
-  <section>
-    <h2>لیست سوالات</h2>
-    <table id="questionsTable">
-      <thead>
-        <tr>
-          <th>متن سوال</th>
-          <th>گزینه‌ها</th>
-          <th>جواب درست</th>
-          <th>امتیاز</th>
-          <th>عملیات</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <!-- 🔹 ذخیره نهایی config -->
-  <section>
-    <button onclick="saveConfig()" style="background:#00ffa0;">ذخیره نهایی پیکربندی مسابقه</button>
-  </section>
-</div>
+      <div class="admin-actions">
+        <label>لینک کانال: <input id="admin-channel" /></label><br/>
+        <label>تعداد کانال‌های اجباری: <input id="admin-required-channels" type="number" min="1" value="1"/></label><br/>
+        <button onclick="saveSettings()">ذخیره تنظیمات</button>
+        <hr/>
+        <h3>سوالات مسابقه</h3>
+        <button onclick="addQuestion()">افزودن سوال</button>
+        <button onclick="loadQuestions()">بارگذاری سوال‌ها</button>
+        <div id="admin-questions"></div>
+        <hr/>
+        <button onclick="clearAllData()">پاک‌سازی محلی (localStorage)</button>
+      </div>
+    </div>
+  </div>
 
 <script>
-  // 🔹 بارگذاری سوال‌ها و جوایز از localStorage
-  let questions = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+function saveSettings(){
+  const channel = document.getElementById('admin-channel').value || 'https://eitaa.com/hamserr';
+  const req = Number(document.getElementById('admin-required-channels').value) || 1;
+  const cfg = JSON.parse(localStorage.getItem('quizConfig') || '{}');
+  cfg.channel = channel;
+  cfg.requiredChannels = req;
+  localStorage.setItem('quizConfig', JSON.stringify(cfg));
+  alert('تنظیمات ذخیره شد');
+}
 
-  function renderQuestionsTable(){
-    const tbody = document.querySelector('#questionsTable tbody');
-    tbody.innerHTML = '';
-    questions.forEach((q,i)=>{
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${q.text}</td>
-        <td>${q.options.join(' | ')}</td>
-        <td>${q.answer}</td>
-        <td>${q.score}</td>
-        <td>
-          <button onclick="editQuestion(${i})">ویرایش</button>
-          <button class="danger" onclick="deleteQuestion(${i})">حذف</button>
-        </td>
-      `;
-      tbody.appendChild(tr);
-    });
+function addQuestion(){
+  const q = prompt('متن سوال (فارسی):');
+  if(!q) return;
+  const opts = prompt('گزینه‌ها را با ویرگول جدا کنید (۴ گزینه پیشنهاد می‌شود):');
+  if(!opts) return;
+  const answer = prompt('شاخص گزینه درست (0 برای اولین، 1 برای دوم، ...):');
+  const score = prompt('امتیاز سوال (مثلا 5):', '5');
+  const questions = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  questions.push({
+    q: q,
+    options: opts.split(',').map(s=>s.trim()),
+    answer: Number(answer),
+    score: Number(score)
+  });
+  localStorage.setItem('quizQuestions', JSON.stringify(questions));
+  alert('سوال اضافه شد');
+  loadQuestions();
+}
+
+function loadQuestions(){
+  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  const container = document.getElementById('admin-questions');
+  container.innerHTML = '';
+  if(qs.length===0) container.innerHTML = '<p>سوالی موجود نیست.</p>';
+  qs.forEach((item, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'admin-q';
+    div.innerHTML = `<b>${idx+1}.</b> ${item.q} <button onclick="removeQuestion(${idx})">حذف</button>`;
+    container.appendChild(div);
+  });
+}
+
+function removeQuestion(i){
+  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  qs.splice(i,1);
+  localStorage.setItem('quizQuestions', JSON.stringify(qs));
+  loadQuestions();
+}
+
+function clearAllData(){
+  if(confirm('آیا مطمئن هستید؟ همه داده‌های محلی پاک خواهند شد.')){
+    localStorage.clear();
+    alert('پاک شد');
+    location.reload();
   }
+}
 
-  renderQuestionsTable();
-
-  function addQuestion(){
-    const text = document.getElementById('questionText').value.trim();
-    const options = document.getElementById('questionOptions').value.split(',').map(s=>s.trim());
-    const answer = Number(document.getElementById('correctIndex').value);
-    const score = Number(document.getElementById('questionScore').value);
-
-    if(!text || options.length<2 || isNaN(answer) || isNaN(score)){
-      alert('لطفاً همه فیلدها را درست پر کنید.');
-      return;
-    }
-
-    questions.push({text, options, answer, score});
-    localStorage.setItem('quizQuestions', JSON.stringify(questions));
-    renderQuestionsTable();
-    document.getElementById('questionText').value='';
-    document.getElementById('questionOptions').value='';
-    document.getElementById('correctIndex').value='0';
-    document.getElementById('questionScore').value='5';
+fetch('config.json').then(r=>r.json()).then(cfg=>{
+  const localCfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
+  if(!localCfg.channel){
+    localCfg.channel = cfg.channel_link || 'https://eitaa.com/hamserr';
+    localCfg.requiredChannels = cfg.requiredChannels || 1;
+    localStorage.setItem('quizConfig', JSON.stringify(localCfg));
   }
-
-  function editQuestion(index){
-    const q = questions[index];
-    document.getElementById('questionText').value = q.text;
-    document.getElementById('questionOptions').value = q.options.join(',');
-    document.getElementById('correctIndex').value = q.answer;
-    document.getElementById('questionScore').value = q.score;
-
-    // حذف سوال فعلی قبل از ذخیره مجدد
-    questions.splice(index,1);
-    renderQuestionsTable();
-  }
-
-  function deleteQuestion(index){
-    if(confirm('آیا مطمئن هستید؟')) {
-      questions.splice(index,1);
-      localStorage.setItem('quizQuestions', JSON.stringify(questions));
-      renderQuestionsTable();
-    }
-  }
-
-  function savePrizes(){
-    const p1 = Number(document.getElementById('prize1').value);
-    const p2 = Number(document.getElementById('prize2').value);
-    const p3 = Number(document.getElementById('prize3').value);
-    if(isNaN(p1) || isNaN(p2) || isNaN(p3)){
-      alert('لطفاً مقادیر جوایز را وارد کنید.');
-      return;
-    }
-    const prizes = {first: p1, second: p2, third: p3};
-    localStorage.setItem('quizPrizes', JSON.stringify(prizes));
-    alert('جوایز ذخیره شد ✅');
-  }
-
-  function saveConfig(){
-    const config = {questions, prizes: JSON.parse(localStorage.getItem('quizPrizes') || '{}')};
-    localStorage.setItem('quizConfig', JSON.stringify(config));
-    alert('تنظیمات مسابقه با موفقیت ذخیره شد ✅');
-  }
-
+  const qlocal = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
+  if(qlocal.length===0 && cfg.questions) localStorage.setItem('quizQuestions', JSON.stringify(cfg.questions));
+  document.getElementById('admin-channel').value = localCfg.channel;
+  document.getElementById('admin-required-channels').value = localCfg.requiredChannels;
+  loadQuestions();
+});
 </script>
 </body>
 </html>
