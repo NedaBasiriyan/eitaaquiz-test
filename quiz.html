@@ -2,55 +2,16 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سؤالات مسابقه</title>
+<title>مسابقه</title>
 <link rel="stylesheet" href="style.css">
+<script src="quiz.js" defer></script>
 </head>
-<body style="background-image: url('assets/images/background_questions.jpg');">
-
-<div class="page neon-box">
-  <h2 class="neon-text">مسابقه حقوقی</h2>
-  <div id="quizContainer"></div>
+<body>
+<div class="question-bg">
+    <div id="character-display"></div>
+    <div id="question-box"></div>
+    <div id="options-box"></div>
+    <div id="score-box"></div>
 </div>
-
-<script>
-if (!localStorage.getItem('joinedChannel')) {
-  alert("برای شرکت در مسابقه باید ابتدا در کانال عضو شوید.");
-  window.location.href = "character.html";
-}
-
-const questions = JSON.parse(localStorage.getItem('questions')) || [
-  { q: "اگر زوجه مهریه خود را ببخشد، آیا قابل رجوع است؟", a: ["بله", "خیر"], correct: 1 },
-  { q: "در صورت طلاق، حضانت فرزند تا چه سنی با مادر است؟", a: ["۷ سال", "۹ سال"], correct: 0 },
-  { q: "نفقه شامل کدام مورد نیست؟", a: ["مسکن", "تحصیل", "پوشاک"], correct: 1 },
-  { q: "طلاق توافقی در چه صورتی ثبت می‌شود؟", a: ["با رضایت زوجین", "بدون رضایت زوج"], correct: 0 },
-  { q: "مهریه عندالاستطاعه یعنی چه؟", a: ["پرداخت فوری", "پرداخت در صورت توان مالی"], correct: 1 }
-];
-
-let current = 0, score = 0;
-
-function showQuestion() {
-  if (current >= questions.length) return showResult();
-  const q = questions[current];
-  document.getElementById('quizContainer').innerHTML = `
-    <p class="neon-text">${q.q}</p>
-    ${q.a.map((x, i) => `<button class="neon-button" onclick="answer(${i})">${x}</button>`).join('')}
-  `;
-}
-
-function answer(i) {
-  if (i === questions[current].correct) score++;
-  current++;
-  showQuestion();
-}
-
-function showResult() {
-  localStorage.setItem('quizScore', score);
-  localStorage.setItem('quizTotal', questions.length);
-  window.location.href = "result.html";
-}
-
-showQuestion();
-</script>
 </body>
 </html>
