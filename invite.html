@@ -1,5 +1,52 @@
-<h1>🎯 دعوت از دوستان</h1>
-<p>برای کسب امتیاز بیشتر، لینک زیر را به دوستانتان بدهید:</p>
-<input readonly id="invite-link">
-<button id="copy-invite">کپی لینک</button>
-<p id="ref-count"></p>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دعوت از دوستان</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-main">
+
+    <div class="top-header">
+      <img class="logo" src="assets/images/logo-main.png" alt="لوگو">
+    </div>
+
+    <main class="quiz-area neon-box">
+      <h1>🎯 دعوت از دوستان</h1>
+      <p>برای کسب امتیاز بیشتر، لینک زیر را به دوستانتان بدهید:</p>
+      <input readonly id="invite-link">
+      <button id="copy-invite" class="btn-small">کپی لینک</button>
+      <p id="ref-count"></p>
+
+      <div style="margin-top:20px;">
+        <button onclick="location.href='index.html'" class="btn-primary">بازگشت به صفحه اصلی</button>
+      </div>
+    </main>
+
+    <script>
+      let userInviteId = localStorage.getItem('userInviteId');
+      if(!userInviteId){
+        userInviteId = Math.floor(Math.random()*900000+100000).toString();
+        localStorage.setItem('userInviteId', userInviteId);
+      }
+
+      const inviteInput = document.getElementById('invite-link');
+      inviteInput.value = window.location.origin + window.location.pathname.replace(/[^/]*$/,'') + 'quiz.html?ref=' + userInviteId;
+
+      const referrals = JSON.parse(localStorage.getItem('referrals')||'{}');
+      const refCount = referrals[userInviteId] || 0;
+      document.getElementById('ref-count').innerText = `تعداد افرادی که با لینک شما عضو شدند: ${refCount}`;
+
+      document.getElementById('copy-invite').addEventListener('click', ()=>{
+        inviteInput.select();
+        inviteInput.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+        alert('لینک دعوت کپی شد!');
+      });
+    </script>
+
+  </div>
+</body>
+</html>
