@@ -1,51 +1,82 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>عضویت در کانال - مسابقه حقوقی</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عضویت در کانال</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "ScheherazadeNew", sans-serif;
+      background: linear-gradient(to bottom, #4fc1e9, #2a9fd6);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+    }
+
+    .container {
+      background-color: rgba(0,0,0,0.6);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #fff;
+      background-color: #ff9800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: #e68900;
+    }
+  </style>
 </head>
 <body>
-  <div class="background-main">
-
-    <!-- لوگو بالای صفحه -->
-    <header class="top-header">
-      <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
-    </header>
-
-    <!-- محتوا -->
-    <main class="center-area">
-      <section class="membership-section neon-box">
-        <h2>عضویت در کانال</h2>
-        <p>برای شرکت در مسابقه، ابتدا در کانال زیر عضو شوید:</p>
-        <a href="https://t.me/YourChannelName" target="_blank" class="btn-primary">رفتن به کانال</a>
-        
-        <p>پس از عضویت، دکمه زیر را بزنید تا عضویت شما تایید شود و وارد مسابقه شوید:</p>
-        <button class="btn-primary" onclick="verifyMembership()">تایید عضویت و ادامه</button>
-
-        <p id="verifyMessage" class="verify-text"></p>
-      </section>
-    </main>
-
+  <div class="container">
+    <h1>مرحله عضویت</h1>
+    <p>برای شرکت در مسابقه ابتدا در کانال زیر عضو شوید:</p>
+    <a class="btn" href="https://eitaa.com/YourChannel" target="_blank">باز کردن کانال</a>
+    <button class="btn" id="confirmBtn">تایید عضویت و ادامه</button>
   </div>
 
   <script>
-    function verifyMembership() {
-      // شبیه‌سازی تایید عضویت (در نسخه واقعی باید API یا webhook بررسی شود)
-      const verified = confirm("آیا عضویت شما در کانال تایید شد؟");
+    // بررسی عضویت شبیه‌سازی شده با localStorage
+    document.getElementById('confirmBtn').addEventListener('click', function() {
+      localStorage.setItem('membershipConfirmed', 'true');
+      // انتقال به صفحه سوالات
+      window.location.href = 'questions.html';
+    });
 
-      const messageEl = document.getElementById("verifyMessage");
-      if (verified) {
-        messageEl.textContent = "عضویت تایید شد! شما وارد مسابقه می‌شوید.";
-        messageEl.style.color = "green";
-        setTimeout(() => {
-          window.location.href = "quiz.html"; // هدایت به صفحه سوالات
-        }, 1500);
-      } else {
-        messageEl.textContent = "لطفا ابتدا عضو کانال شوید و سپس تایید کنید.";
-        messageEl.style.color = "red";
-      }
+    // اگر قبلاً عضویت تایید شده، مستقیماً به سوالات هدایت شود
+    if(localStorage.getItem('membershipConfirmed') === 'true') {
+      window.location.href = 'questions.html';
     }
   </script>
 </body>
