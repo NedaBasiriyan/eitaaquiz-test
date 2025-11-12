@@ -1,36 +1,106 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پنل مدیریت</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>پنل مدیریت مسابقه</title>
 <link rel="stylesheet" href="style.css">
-<script>
-function addQuestion(){
-  let q = prompt("متن سوال:");
-  let options = prompt("گزینه‌ها با کاما جدا شوند:");
-  let answer = prompt("شماره گزینه درست (۰ تا ۳):");
-  let score = prompt("امتیاز سوال:");
-  if(q && options && answer !== null && score){
-    let qs = JSON.parse(localStorage.getItem('questions')||"[]");
-    qs.push({q:q, options:options.split(","), answer:Number(answer), score:Number(score)});
-    localStorage.setItem('questions', JSON.stringify(qs));
-    alert("سوال اضافه شد!");
-  }
-}
-function resetQuiz(){
-  localStorage.clear();
-  alert("کل داده‌ها پاک شد!");
-}
-</script>
 </head>
 <body>
-<div class="background-main">
-  <div class="neon-box admin-panel">
-    <h2>پنل مدیریتی</h2>
-    <button onclick="addQuestion()">افزودن سوال</button>
-    <button onclick="resetQuiz()">پاک کردن داده‌ها</button>
+  <div class="background-main">
+    <div class="neon-box admin-box">
+      <h2>پنل مدیریت</h2>
+      <p>تنظیمات کانال و سوالات را اینجا مدیریت کنید.</p>
+
+      <div class="admin-actions">
+        <label>لینک کانال: <input id="admin-channel" /></label><br/>
+        <label>تعداد کانال‌های اجباری: <input id="admin-required-channels" type="number" min="1" value="1"/></label><br/>
+        <button onclick="saveSettings()">ذخیره تنظیمات</button>
+        <hr/>
+        <h3>سوالات مسابقه</h3>
+        <button onclick="addQuestion()">افزودن سوال</button>
+        <button onclick="loadQuestions()">بارگذاری سوال‌ها</button>
+        <div id="admin-questions"></div>
+        <hr/>
+        <button onclick="clearAllData()">پاک‌سازی محلی (localStorage)</button>
+      </div>
+    </div>
   </div>
-</div>
+
+<script>
+// تنظیمات و مدیریت سوالات با localStorage
+function saveSettings(){
+  const channel = document.getElementById('admin-channel').value || 'https://eitaa.com/hamserr';
+  const req = Number(document.getElementById('admin-required-channels').value) || 1;
+  const cfg = JSON.parse(localStorage.getItem('quizConfig') || '{}');
+  cfg.channel = channel;
+  cfg.requiredChannels = req;
+  localStorage.setItem('quizConfig', JSON.stringify(cfg));
+  alert('تنظیمات ذخیره شد');
+}
+
+function addQuestion(){
+  const q = prompt('متن سوال (فارسی):');
+  if(!q) return;
+  const opts = prompt('گزینه‌ها را با ویرگول جدا کنید (۴ گزینه پیشنهاد می‌شود):');
+  if(!opts) return;
+  const answer = prompt('شاخص گزینه درست (0 برای اولین، 1 برای دوم، ...):');
+  const score = prompt('امتیاز سوال (مثلا 5):', '5');
+  const questions = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  questions.push({
+    q: q,
+    options: opts.split(',').map(s=>s.trim()),
+    answer: Number(answer),
+    score: Number(score)
+  });
+  localStorage.setItem('quizQuestions', JSON.stringify(questions));
+  alert('سوال اضافه شد');
+  loadQuestions();
+}
+
+function loadQuestions(){
+  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  const container = document.getElementById('admin-questions');
+  container.innerHTML = '';
+  if(qs.length===0) container.innerHTML = '<p>سوالی موجود نیست.</p>';
+  qs.forEach((item, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'admin-q';
+    div.innerHTML = `<b>${idx+1}.</b> ${item.q} <button onclick="removeQuestion(${idx})">حذف</button>`;
+    container.appendChild(div);
+  });
+}
+
+function removeQuestion(i){
+  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
+  qs.splice(i,1);
+  localStorage.setItem('quizQuestions', JSON.stringify(qs));
+  loadQuestions();
+}
+
+function clearAllData(){
+  if(confirm('آیا مطمئن هستید؟ همه داده‌های محلی پاک خواهند شد.')){
+    localStorage.clear();
+    alert('پاک شد');
+    location.reload();
+  }
+}
+
+// مقداردهی اولیه از config.json در صورت نبود داده محلی
+fetch('config.json').then(r=>r.json()).then(cfg=>{
+  const localCfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
+  if(!localCfg.channel){
+    localCfg.channel = cfg.channel_link || 'https://eitaa.com/hamserr';
+    localCfg.requiredChannels = cfg.requiredChannels || 1;
+    localStorage.setItem('quizConfig', JSON.stringify(localCfg));
+  }
+  // سوالات پیش‌فرض اگر نداریم
+  const qlocal = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
+  if(qlocal.length===0 && cfg.questions) localStorage.setItem('quizQuestions', JSON.stringify(cfg.questions));
+  document.getElementById('admin-channel').value = localCfg.channel;
+  document.getElementById('admin-required-channels').value = localCfg.requiredChannels;
+  loadQuestions();
+});
+</script>
 </body>
 </html>
