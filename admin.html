@@ -3,41 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پنل مدیریت مسابقه</title>
+<title>پنل مدیریت</title>
 <link rel="stylesheet" href="style.css">
-</head>
-<body class="page">
-  <h2 class="neon-text">پنل مدیریت مسابقه</h2>
-
-  <div class="admin-box">
-    <h3 class="neon-text">مدیریت سؤالات</h3>
-    <textarea id="questionData" rows="10" class="input"></textarea>
-    <button class="neon-button" onclick="saveQuestions()">ذخیره سؤالات</button>
-  </div>
-
-  <div class="admin-box">
-    <h3 class="neon-text">مدیریت کانال‌های عضویت</h3>
-    <textarea id="channelData" rows="5" class="input"></textarea>
-    <button class="neon-button" onclick="saveChannels()">ذخیره کانال‌ها</button>
-  </div>
-
 <script>
-document.getElementById('questionData').value = localStorage.getItem('questions') || '';
-document.getElementById('channelData').value = localStorage.getItem('channels') || '';
-
-function saveQuestions(){
-  try {
-    localStorage.setItem('questions', document.getElementById('questionData').value);
-    alert("سؤالات ذخیره شد ✅");
-  } catch { alert("خطا در ذخیره سؤالات"); }
+function addQuestion(){
+  let q = prompt("متن سوال:");
+  let options = prompt("گزینه‌ها با کاما جدا شوند:");
+  let answer = prompt("شماره گزینه درست (۰ تا ۳):");
+  let score = prompt("امتیاز سوال:");
+  if(q && options && answer !== null && score){
+    let qs = JSON.parse(localStorage.getItem('questions')||"[]");
+    qs.push({q:q, options:options.split(","), answer:Number(answer), score:Number(score)});
+    localStorage.setItem('questions', JSON.stringify(qs));
+    alert("سوال اضافه شد!");
+  }
 }
-
-function saveChannels(){
-  try {
-    localStorage.setItem('channels', document.getElementById('channelData').value);
-    alert("کانال‌ها ذخیره شد ✅");
-  } catch { alert("خطا در ذخیره کانال‌ها"); }
+function resetQuiz(){
+  localStorage.clear();
+  alert("کل داده‌ها پاک شد!");
 }
 </script>
+</head>
+<body>
+<div class="background-main">
+  <div class="neon-box admin-panel">
+    <h2>پنل مدیریتی</h2>
+    <button onclick="addQuestion()">افزودن سوال</button>
+    <button onclick="resetQuiz()">پاک کردن داده‌ها</button>
+  </div>
+</div>
 </body>
 </html>
