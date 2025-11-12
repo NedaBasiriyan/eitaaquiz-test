@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>انتخاب کاراکتر</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="background-image: url('assets/images/background_main.jpg');">
+  <div class="page">
+    <h2 class="neon-text">انتخاب کاراکتر شما</h2>
+    <div class="characters">
+      <img src="assets/images/character_male.png" class="character" onclick="selectCharacter('male')">
+      <img src="assets/images/character_female.png" class="character" onclick="selectCharacter('female')">
+    </div>
+    <div class="neon-box">
+      <p class="neon-text">برای ادامه لطفاً در کانال زیر عضو شوید:</p>
+      <button class="neon-button" onclick="joinChannel()">عضویت در کانال</button>
+    </div>
+  </div>
+
+<script>
+const channels = JSON.parse(localStorage.getItem('channels')) || [
+  { name: "هم‌سرّ (مشاوره حقوقی)", link: "https://eitaa.com/hamserr" }
+];
+let selectedCharacter = "";
+
+function selectCharacter(type) {
+  selectedCharacter = `assets/images/character_${type}.png`;
+  localStorage.setItem('selectedCharacter', selectedCharacter);
+}
+
+function joinChannel() {
+  const channel = channels[0].link;
+  localStorage.setItem('joinedChannel', 'true');
+  window.open(channel, '_blank');
+  setTimeout(() => {
+    window.location.href = 'quiz.html';
+  }, 3000);
+}
+</script>
+</body>
+</html>
