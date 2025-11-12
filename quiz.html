@@ -3,50 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مسابقه هوش</title>
+<title>مسابقه</title>
 <link rel="stylesheet" href="style.css">
+<script src="quiz.js"></script>
 </head>
 <body>
-
-<div class="main-bg" style="background-image: url('assets/images/background_main.jpg');">
-
-  <!-- نوار بالایی برای امتیاز و کاراکتر -->
-  <div class="top-bar neon-box">
-    <div id="score">امتیاز: 0</div>
-    <div id="character-display">
-      <img id="user-character" src="" alt="کاراکتر انتخاب شده" />
+<div class="background-main">
+  <div class="quiz-container">
+    <div class="character-display">
+      <img id="player-character" src="" alt="کاراکتر شما">
+    </div>
+    <div id="question-box" class="neon-box">
+      <h3 id="question-text"></h3>
+      <div id="answers"></div>
+    </div>
+    <div class="score-box neon-box">
+      <span>امتیاز: <span id="score">0</span></span>
     </div>
   </div>
-
-  <!-- سوالات -->
-  <div class="quiz-container neon-box">
-    <h2 id="question-text">سوال بارگذاری می‌شود...</h2>
-    <div class="answers">
-      <button class="answer-btn" data-answer="0">جواب 1</button>
-      <button class="answer-btn" data-answer="1">جواب 2</button>
-      <button class="answer-btn" data-answer="2">جواب 3</button>
-      <button class="answer-btn" data-answer="3">جواب 4</button>
-    </div>
-    <div id="feedback" class="feedback"></div>
-  </div>
-
-  <!-- لینک دعوت -->
-  <div class="invite-box neon-box">
-    <p>لینک اختصاصی شما برای دعوت دوستان:</p>
-    <input type="text" id="invite-link" readonly>
-  </div>
-
 </div>
-
-<script src="quiz.js"></script>
 <script>
-const userCharacter = localStorage.getItem('selectedCharacter');
-document.getElementById('user-character').src = userCharacter || 'assets/images/character_female.jpeg';
-
-// لینک اختصاصی
-const inviteInput = document.getElementById('invite-link');
-inviteInput.value = window.location.href + "?ref=" + Math.random().toString(36).substring(2, 8);
+document.getElementById('player-character').src = 
+  localStorage.getItem('character') === 'female' ? 
+  'assets/images/character_female.jpeg' : 
+  'assets/images/character_male.jpeg';
+startQuiz();
 </script>
-
 </body>
 </html>
