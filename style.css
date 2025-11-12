@@ -1,192 +1,55 @@
-/* فونت فارسی نرم و روان */
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
-
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Vazirmatn', sans-serif;
-    background-color: #0d1b2a;
-    color: #fff;
-    min-height: 100vh;
+body, html{
+  margin:0;
+  padding:0;
+  font-family: Vazir, Tahoma, sans-serif;
+  direction: rtl;
 }
 
-.main-bg {
-    background-image: url('assets/images/background_main.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.background-main{
+  background: url('assets/images/background_main.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 }
 
-.neon-box {
-    border: 2px solid #00f5d4;
-    padding: 20px;
-    margin: 15px;
-    border-radius: 15px;
-    background: rgba(0,0,0,0.6);
-    box-shadow: 0 0 10px #00f5d4, 0 0 20px #00f5d4, 0 0 40px #00f5d4;
-    text-align: center;
+.logo{
+  width:150px;
+  margin-bottom:20px;
 }
 
-button {
-    padding: 12px 25px;
-    font-size: 1.1em;
-    margin-top: 15px;
-    border: none;
-    border-radius: 10px;
-    background-color: #00f5d4;
-    color: #0d1b2a;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 5px #00f5d4, 0 0 15px #00f5d4;
+.container, .neon-box, .quiz-container, .admin-panel{
+  background: rgba(0,0,0,0.5);
+  border: 2px solid #0ff;
+  box-shadow: 0 0 20px #0ff;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  color:#fff;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #00f5d4, 0 0 20px #00f5d4, 0 0 40px #00f5d4;
+.btn-start, button{
+  padding:10px 20px;
+  margin:10px;
+  background:#0ff;
+  border:none;
+  border-radius:10px;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 10px;
-    border: 2px solid #00f5d4;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    text-align: center;
-    margin-top: 10px;
+.character-container img, .character-display img{
+  width:120px;
+  margin:10px;
+  cursor:pointer;
+  border:2px solid #0ff;
+  border-radius:50%;
 }
 
-input:focus {
-    outline: none;
-    border-color: #ff6f61;
-    box-shadow: 0 0 10px #ff6f61;
-}
-
-.result-container h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-}
-
-.result-container h2 {
-    font-size: 2em;
-    margin: 10px 0;
-    color: #00ff6a;
-}
-
-.user-banner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.user-banner img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #00f5d4;
-    margin-bottom: 10px;
-}
-
-.invite-box {
-    margin-top: 15px;
-    padding: 10px;
-}
-
-.character-selection {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
-}
-
-.character-selection img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.character-selection img.selected {
-    border-color: #00f5d4;
-    box-shadow: 0 0 15px #00f5d4;
-}
-
-.quiz-question {
-    background: rgba(0,0,0,0.6);
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px #00f5d4;
-}
-
-.quiz-option {
-    background: rgba(0,0,0,0.5);
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.quiz-option.correct {
-    background-color: rgba(0,255,0,0.6);
-    border: 2px solid #00ff00;
-}
-
-.quiz-option.wrong {
-    background-color: rgba(255,0,0,0.6);
-    border: 2px solid #ff0000;
-}
-
-.quiz-option:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #00f5d4;
-}
-
-/* متن ها در کادر نئونی بالا و پایین */
-.top-text, .bottom-text {
-    background: rgba(0,0,0,0.5);
-    border: 2px solid #00f5d4;
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin: 10px;
-    box-shadow: 0 0 10px #00f5d4;
-}
-
-/* فونت و اندازه متن برای توضیحات مسابقه و تشویق */
-.info-text {
-    font-size: 1em;
-    color: #fff;
-    margin: 10px 0;
-}
-
-/* واکنش‌گرا برای موبایل */
-@media (max-width: 768px){
-    .character-selection img {
-        width: 80px;
-        height: 80px;
-    }
-    .user-banner img {
-        width: 80px;
-        height: 80px;
-    }
-    .quiz-option {
-        font-size: 0.9em;
-        padding: 10px;
-    }
-    .result-container h1 {
-        font-size: 1.8em;
-    }
-    .result-container h2 {
-        font-size: 1.5em;
-    }
+.score-box{
+  margin-top:20px;
+  font-size:20px;
 }
