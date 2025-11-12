@@ -1,12 +1,43 @@
-<div class="neon-box result-box">
-  <h2>نتیجه شما</h2>
-  <p>امتیاز شما: <span id="final-score"></span></p>
-  <p>لینک اختصاصی برای دعوت از دوستانتان:</p>
-  <input type="text" id="invite-link" readonly>
-</div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>نتیجه مسابقه</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-main">
+    <div class="neon-box result-box">
+      <h1>🎉 تبریک! 🎉</h1>
+      <p>امتیاز نهایی شما:</p>
+      <h2 id="final-score">0</h2>
+
+      <div class="user-banner">
+        <img id="banner-character" src="" alt="کاراکتر">
+        <p id="banner-text">بنر اختصاصی شما — خوش آمدید!</p>
+      </div>
+
+      <div class="share-box">
+        <p>لینک دعوت اختصاصی شما:</p>
+        <input id="final-invite" readonly>
+        <button onclick="location.href='index.html'">بازگشت به صفحه اصلی</button>
+      </div>
+    </div>
+  </div>
+
 <script>
-let score = localStorage.getItem('finalScore') || 0;
-document.getElementById('final-score').innerText = score;
-let userId = Math.floor(Math.random()*10000);
-document.getElementById('invite-link').value = window.location.href.replace('result.html','quiz.html') + "?ref=" + userId;
+const final = localStorage.getItem('finalScore') || 0;
+document.getElementById('final-score').innerText = final;
+
+// نمایش کاراکتر در بنر
+const ch = localStorage.getItem('selectedCharacter') || 'female';
+document.getElementById('banner-character').src = `assets/images/character_${ch}.jpeg`;
+
+// لینک اختصاصی
+const userId = localStorage.getItem('userInviteId') || Math.floor(Math.random()*900000+100000);
+localStorage.setItem('userInviteId', userId);
+document.getElementById('final-invite').value = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/') + 'quiz.html?ref=' + userId;
 </script>
+</body>
+</html>
