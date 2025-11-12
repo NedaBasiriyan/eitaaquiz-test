@@ -1,29 +1,98 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مسابقه حقوقی - خوش‌آمد</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مسابقه حقوقی دکتر قهرمان</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      background: url('assets/images/background_main.jpg') no-repeat center center/cover;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .logo {
+      width: 160px;
+      margin-top: 30px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+      animation: fadeIn 2s ease-in-out;
+    }
+    .neon-box {
+      width: 90%;
+      max-width: 360px;
+      padding: 14px 0;
+      border-radius: 20px;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 15px #0ff8;
+      background: rgba(0,0,0,0.35);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1.5s ease;
+    }
+    .neon-box:hover {
+      background: rgba(0,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    footer {
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <div class="background-main">
-    <!-- لوگو بالای صفحه -->
-    <header class="top-header">
-      <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
-    </header>
 
-    <!-- فضای میانی خالی برای زیبایی -->
-    <main class="center-area">
-      <!-- خالی، بک‌گراند دیده می‌شود -->
-    </main>
+  <img src="assets/images/logo-main.png" alt="لوگو مسابقه" class="logo">
 
-    <!-- کادر نئونی پایین با پیام خوش‌آمد -->
-    <footer class="bottom-box neon-box">
-      <h1>به مسابقه حقوقی دکتر قهرمان خوش آمدید</h1>
-      <p>در مسابقه شرکت کنید، امتیاز جمع کنید و برنده‌ جوایز نقدی شوید.</p>
-      <a class="btn-primary" href="character.html">شروع مسابقه</a>
-    </footer>
-  </div>
+  <h1>به مسابقه حقوقی دکتر قهرمان خوش آمدید</h1>
+
+  <div id="startBtn" class="neon-box">شروع مسابقه</div>
+
+  <footer>© 2025 - تیم مسابقه حقوقی دکتر قهرمان</footer>
+
+  <script>
+    const btn = document.getElementById('startBtn');
+
+    btn.addEventListener('click', () => {
+      const joined = localStorage.getItem('joinedChannel') === 'true';
+      const char = localStorage.getItem('selectedCharacter');
+      const hasConfig = localStorage.getItem('quizConfig');
+
+      // اگر قبلاً عضو شده
+      if (joined) {
+        if (!char) {
+          // اگر کاراکتر انتخاب نکرده بود، بره صفحه انتخاب
+          window.location.href = 'character.html';
+        } else {
+          // اگر کاراکتر انتخاب شده، مستقیم بره مسابقه
+          window.location.href = 'quiz.html';
+        }
+      } else {
+        // اگر هنوز عضو نیست، اول صفحه معرفی و بعد عضویت نمایش داده شود
+        window.location.href = 'structure.html';
+      }
+    });
+  </script>
 </body>
 </html>
