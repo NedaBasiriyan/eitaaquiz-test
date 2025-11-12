@@ -1,106 +1,192 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>پنل مدیریت مسابقه</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>پنل مدیریت — مسابقه</title>
+<link rel="stylesheet" href="../style.css"/>
+<style>
+  /* چند استایل کوچک برای پنل */
+  .admin-wrap{max-width:1100px;margin:24px auto}
+  .admin-card{background:rgba(0,0,0,0.6);padding:16px;border-radius:12px;margin-bottom:12px}
+  .admin-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  input[type=text],input[type=number],input[type=password]{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#eafcfb}
+  button.copy-btn{padding:8px 10px;border-radius:8px;background:var(--accent);border:none;cursor:pointer}
+</style>
 </head>
 <body>
-  <div class="background-main">
-    <div class="neon-box admin-box">
-      <h2>پنل مدیریت</h2>
-      <p>تنظیمات کانال و سوالات را اینجا مدیریت کنید.</p>
+  <div class="background-main admin-wrap">
+    <div class="neon-box admin-card" id="loginCard">
+      <h2>ورود به پنل مدیریت</h2>
+      <div style="margin-top:10px;">
+        <label>نام کاربری: <input id="adminUser" value="admin"/></label><br/><br/>
+        <label>رمز عبور: <input id="adminPass" type="password" value="admin1234"/></label><br/><br/>
+        <button id="loginBtn" class="btn-primary">ورود</button>
+      </div>
+    </div>
 
-      <div class="admin-actions">
-        <label>لینک کانال: <input id="admin-channel" /></label><br/>
-        <label>تعداد کانال‌های اجباری: <input id="admin-required-channels" type="number" min="1" value="1"/></label><br/>
-        <button onclick="saveSettings()">ذخیره تنظیمات</button>
-        <hr/>
-        <h3>سوالات مسابقه</h3>
-        <button onclick="addQuestion()">افزودن سوال</button>
-        <button onclick="loadQuestions()">بارگذاری سوال‌ها</button>
-        <div id="admin-questions"></div>
-        <hr/>
-        <button onclick="clearAllData()">پاک‌سازی محلی (localStorage)</button>
+    <div id="panel" style="display:none">
+      <div class="neon-box admin-card">
+        <h3>تنظیمات عمومی مسابقه</h3>
+        <div class="admin-row">
+          <label>لینک کانال: <input id="cfgChannel" style="width:320px" /></label>
+          <label>آیدی کانال: <input id="cfgChannelId" style="width:180px" /></label>
+          <label>تعداد کانال‌های اجباری: <input id="cfgRequired" type="number" min="1" value="1" style="width:80px"/></label>
+        </div>
+        <div style="margin-top:10px;">
+          <button class="btn-secondary" id="saveCfg">ذخیره تنظیمات</button>
+        </div>
+      </div>
+
+      <div class="neon-box admin-card">
+        <h3>کد عضویت (Join Code)</h3>
+        <div class="admin-row">
+          <input id="joinCode" placeholder="اینجا کد تولید/چسبانده می‌شود" style="width:320px"/>
+          <button id="genCode" class="btn-primary">تولید کد جدید</button>
+          <button id="copyJoin" class="copy-btn">کپی</button>
+        </div>
+        <p style="margin-top:8px;color:#bfe">دستورالعمل: کد تولیدشده را در یک پست خوش‌آمد کانال ایتا منتشر کنید. کاربر باید آن را در صفحه عضویت وارد کند.</p>
+      </div>
+
+      <div class="neon-box admin-card">
+        <h3>مدیریت سوالات</h3>
+        <div style="margin-bottom:8px;">
+          <button id="addQBtn" class="btn-primary">افزودن سوال</button>
+          <button id="loadQBtn" class="btn-secondary">بارگذاری سوال‌ها</button>
+        </div>
+        <div id="questionsList"></div>
+      </div>
+
+      <div class="neon-box admin-card">
+        <h3>مدیریت امنیت</h3>
+        <div class="admin-row">
+          <label>تغییر رمز مدیر: <input id="newAdminPass" type="password" placeholder="رمز جدید"/></label>
+          <button id="changePassBtn" class="btn-primary">تغییر رمز</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:10px">
+        <button id="logoutBtn" class="btn-secondary">خروج</button>
       </div>
     </div>
   </div>
 
 <script>
-// تنظیمات و مدیریت سوالات با localStorage
-function saveSettings(){
-  const channel = document.getElementById('admin-channel').value || 'https://eitaa.com/hamserr';
-  const req = Number(document.getElementById('admin-required-channels').value) || 1;
-  const cfg = JSON.parse(localStorage.getItem('quizConfig') || '{}');
-  cfg.channel = channel;
-  cfg.requiredChannels = req;
-  localStorage.setItem('quizConfig', JSON.stringify(cfg));
-  alert('تنظیمات ذخیره شد');
-}
-
-function addQuestion(){
-  const q = prompt('متن سوال (فارسی):');
-  if(!q) return;
-  const opts = prompt('گزینه‌ها را با ویرگول جدا کنید (۴ گزینه پیشنهاد می‌شود):');
-  if(!opts) return;
-  const answer = prompt('شاخص گزینه درست (0 برای اولین، 1 برای دوم، ...):');
-  const score = prompt('امتیاز سوال (مثلا 5):', '5');
-  const questions = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
-  questions.push({
-    q: q,
-    options: opts.split(',').map(s=>s.trim()),
-    answer: Number(answer),
-    score: Number(score)
-  });
-  localStorage.setItem('quizQuestions', JSON.stringify(questions));
-  alert('سوال اضافه شد');
-  loadQuestions();
-}
-
-function loadQuestions(){
-  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
-  const container = document.getElementById('admin-questions');
-  container.innerHTML = '';
-  if(qs.length===0) container.innerHTML = '<p>سوالی موجود نیست.</p>';
-  qs.forEach((item, idx)=>{
-    const div = document.createElement('div');
-    div.className = 'admin-q';
-    div.innerHTML = `<b>${idx+1}.</b> ${item.q} <button onclick="removeQuestion(${idx})">حذف</button>`;
-    container.appendChild(div);
-  });
-}
-
-function removeQuestion(i){
-  const qs = JSON.parse(localStorage.getItem('quizQuestions') || '[]');
-  qs.splice(i,1);
-  localStorage.setItem('quizQuestions', JSON.stringify(qs));
-  loadQuestions();
-}
-
-function clearAllData(){
-  if(confirm('آیا مطمئن هستید؟ همه داده‌های محلی پاک خواهند شد.')){
-    localStorage.clear();
-    alert('پاک شد');
-    location.reload();
+(function(){
+  // پیشفرض: admin / admin1234
+  const stored = JSON.parse(localStorage.getItem('adminAuth')||'{}');
+  if(!stored.password) {
+    localStorage.setItem('adminAuth', JSON.stringify({user:'admin', password: 'admin1234'}));
   }
-}
 
-// مقداردهی اولیه از config.json در صورت نبود داده محلی
-fetch('config.json').then(r=>r.json()).then(cfg=>{
-  const localCfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
-  if(!localCfg.channel){
-    localCfg.channel = cfg.channel_link || 'https://eitaa.com/hamserr';
-    localCfg.requiredChannels = cfg.requiredChannels || 1;
-    localStorage.setItem('quizConfig', JSON.stringify(localCfg));
+  const loginCard = document.getElementById('loginCard');
+  const panel = document.getElementById('panel');
+
+  document.getElementById('loginBtn').addEventListener('click', ()=>{
+    const u = document.getElementById('adminUser').value.trim();
+    const p = document.getElementById('adminPass').value;
+    const auth = JSON.parse(localStorage.getItem('adminAuth')||'{}');
+    if(u === (auth.user||'admin') && p === (auth.password||'admin1234')){
+      loginCard.style.display = 'none';
+      panel.style.display = 'block';
+      loadConfigToUI();
+      loadQuestions();
+    } else alert('نام کاربری یا رمز اشتباه است.');
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    panel.style.display = 'none';
+    loginCard.style.display = 'block';
+    document.getElementById('adminPass').value = '';
+  });
+
+  // Config
+  function loadConfigToUI(){
+    const cfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
+    document.getElementById('cfgChannel').value = cfg.channel || 'https://eitaa.com/hamserr';
+    document.getElementById('cfgChannelId').value = cfg.channelId || '@hamserr';
+    document.getElementById('cfgRequired').value = cfg.requiredChannels || 1;
+    document.getElementById('joinCode').value = cfg.joinCode || '';
   }
-  // سوالات پیش‌فرض اگر نداریم
-  const qlocal = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
-  if(qlocal.length===0 && cfg.questions) localStorage.setItem('quizQuestions', JSON.stringify(cfg.questions));
-  document.getElementById('admin-channel').value = localCfg.channel;
-  document.getElementById('admin-required-channels').value = localCfg.requiredChannels;
-  loadQuestions();
-});
+
+  document.getElementById('saveCfg').addEventListener('click', ()=>{
+    const cfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
+    cfg.channel = document.getElementById('cfgChannel').value.trim();
+    cfg.channelId = document.getElementById('cfgChannelId').value.trim();
+    cfg.requiredChannels = Number(document.getElementById('cfgRequired').value) || 1;
+    cfg.joinCode = document.getElementById('joinCode').value.trim() || cfg.joinCode || '';
+    localStorage.setItem('quizConfig', JSON.stringify(cfg));
+    alert('تنظیمات ذخیره شد.');
+  });
+
+  // Join code generation
+  document.getElementById('genCode').addEventListener('click', ()=>{
+    const code = 'J' + Math.random().toString(36).slice(2,9).toUpperCase();
+    document.getElementById('joinCode').value = code;
+    const cfg = JSON.parse(localStorage.getItem('quizConfig')||'{}');
+    cfg.joinCode = code;
+    localStorage.setItem('quizConfig', JSON.stringify(cfg));
+    alert('کد جدید تولید و ذخیره شد. آن را در یک پست کانال منتشر کنید.');
+  });
+
+  document.getElementById('copyJoin').addEventListener('click', ()=>{
+    const v = document.getElementById('joinCode').value;
+    navigator.clipboard && navigator.clipboard.writeText(v).then(()=> alert('کپی شد'));
+  });
+
+  // change admin password
+  document.getElementById('changePassBtn').addEventListener('click', ()=>{
+    const newp = document.getElementById('newAdminPass').value.trim();
+    if(!newp) { alert('رمز جدید را وارد کنید'); return; }
+    const auth = JSON.parse(localStorage.getItem('adminAuth')||'{}');
+    auth.password = newp;
+    localStorage.setItem('adminAuth', JSON.stringify(auth));
+    alert('رمز مدیر به‌روزرسانی شد.');
+    document.getElementById('newAdminPass').value = '';
+  });
+
+  // Questions management
+  function loadQuestions(){
+    const qs = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
+    const container = document.getElementById('questionsList');
+    container.innerHTML = '';
+    if(qs.length===0) container.innerHTML = '<p>سوال فعالی وجود ندارد.</p>';
+    qs.forEach((q,i)=>{
+      const div = document.createElement('div');
+      div.style.borderTop = '1px solid rgba(255,255,255,0.04)';
+      div.style.padding = '8px 0';
+      div.innerHTML = `<b>${i+1}</b> ${q.q} <button onclick="removeQ(${i})" class="btn-secondary">حذف</button>`;
+      container.appendChild(div);
+    });
+  }
+
+  window.removeQ = function(i){
+    const qs = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
+    if(!confirm('حذف شود؟')) return;
+    qs.splice(i,1);
+    localStorage.setItem('quizQuestions', JSON.stringify(qs));
+    loadQuestions();
+  }
+
+  document.getElementById('addQBtn').addEventListener('click', ()=>{
+    const q = prompt('متن سوال (فارسی):');
+    if(!q) return;
+    const opts = prompt('چند گزینه؟ لطفاً با ویرگول جدا کنید (مثلاً: گزینه1, گزینه2, گزینه3, گزینه4)');
+    if(!opts) return;
+    const ans = prompt('شاخص گزینه درست: 0 برای اولین، 1 برای دوم، ...');
+    const sc = prompt('امتیاز سوال (مثلاً 5):','5');
+    const qs = JSON.parse(localStorage.getItem('quizQuestions')||'[]');
+    qs.push({q:q, options: opts.split(',').map(s=>s.trim()), answer: Number(ans||0), score: Number(sc||5)});
+    localStorage.setItem('quizQuestions', JSON.stringify(qs));
+    loadQuestions();
+  });
+
+  document.getElementById('loadQBtn').addEventListener('click', loadQuestions);
+
+  // initial load
+  loadConfigToUI();
+
+})();
 </script>
 </body>
 </html>
