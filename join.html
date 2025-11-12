@@ -3,49 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عضویت اجباری</title>
+<title>عضویت در کانال</title>
 <link rel="stylesheet" href="style.css">
+<script>
+function checkMembership(){
+  alert("لطفا ابتدا عضو کانال شوید: @hamserr");
+  window.open("https://eitaa.com/hamserr", "_blank");
+}
+function proceedQuiz(){
+  window.location.href = "quiz.html";
+}
+</script>
 </head>
 <body>
-<div class="main-bg" style="background-image: url('assets/images/background_main.jpg');">
-
-  <div class="instructions neon-box">
-    <h2>برای شروع مسابقه ابتدا عضو کانال شوید</h2>
-    <p>👨‍👩‍👦 هم سرّ (مشاوره حقوقی تخصصی)</p>
-    <p>👨‍👩‍👧 طلاق، مهریه، نفقه، خیانت و منازعات مالی و ...</p>
-    <p>🔺️ دکتر قهرمان مشاور رسمی دادگستری</p>
-    <p>✅ میانجیگری برای صلح و سازش</p>
-    <p>آیدی رزرو وقت: <strong>@m_ghahraman</strong></p>
-    <p>رضایتمندی‌ها: <strong>@rezayathamserr</strong></p>
+<div class="background-main">
+  <div class="neon-box">
+    <h2>برای شروع مسابقه ابتدا عضو کانال شوید!</h2>
+    <button onclick="checkMembership()">عضویت در کانال</button>
+    <button onclick="proceedQuiz()">ادامه مسابقه</button>
   </div>
-
-  <div class="channel-link neon-box">
-    <a href="https://eitaa.com/hamserr" target="_blank" id="joinBtn" class="btn">عضویت در کانال</a>
-  </div>
-
-  <div class="next-button neon-box">
-    <button id="startQuizBtn" class="btn disabled">شروع مسابقه</button>
-  </div>
-
 </div>
-
-<script>
-const joinBtn = document.getElementById('joinBtn');
-const startBtn = document.getElementById('startQuizBtn');
-
-// کاربر بعد از کلیک روی لینک عضویت می‌تواند ادامه دهد
-joinBtn.addEventListener('click', () => {
-  startBtn.classList.remove('disabled');
-});
-
-// هدایت به صفحه مسابقه بعد از عضویت
-startBtn.addEventListener('click', () => {
-  if (!startBtn.classList.contains('disabled')) {
-    window.location.href = "quiz.html";
-  } else {
-    alert('لطفا ابتدا عضو کانال شوید.');
-  }
-});
-</script>
 </body>
 </html>
