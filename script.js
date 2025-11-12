@@ -1,90 +1,48 @@
-// شناسه کاربر
-const userID = "Ali123";
-let score = 0;
+let selectedCharacter = '';
 
-const userScoreSpan = document.getElementById("userScore");
-const userPosition = document.getElementById("userPosition");
+function selectCharacter(type) {
+    selectedCharacter = type;
+    alert('شما ' + (type === 'male' ? 'کاراکتر مرد' : 'کاراکتر زن') + ' را انتخاب کردید.');
+}
 
-const getBannerBtn = document.getElementById("getBanner");
-const bannerDiv = document.getElementById("bannerLink");
-const userBannerInput = document.getElementById("userBanner");
-const copyBannerBtn = document.getElementById("copyBanner");
+function goToMembership() {
+    if (!selectedCharacter) {
+        alert('لطفاً یک کاراکتر انتخاب کنید.');
+        return;
+    }
+    // بررسی عضویت ایتا
+    let isMember = false; // مقدار واقعی باید از API یا روش ایتا بررسی شود
+    if (!isMember) {
+        // هدایت به کانال ایتا
+        window.location.href = 'https://eitaa.com/hamserr';
+        return;
+    } else {
+        // ادامه مسابقه
+        window.location.href = 'quiz.html';
+    }
+}
 
-const startQuizBtn = document.getElementById("startQuiz");
-const quizSection = document.getElementById("quizSection");
-const finishQuizBtn = document.getElementById("finishQuiz");
-const resultsSection = document.getElementById("resultsSection");
-const resultsDiv = document.getElementById("results");
-const questionsDiv = document.getElementById("questions");
-
-// سوالات نمونه
-const questions = [
-    {q:"سوال اول: ۲+۲؟", a:["۳","۴","۵"], correct:1},
-    {q:"سوال دوم: پایتخت ایران؟", a:["تهران","اصفهان","شیراز"], correct:0},
-    {q:"سوال سوم: رنگ آسمان؟", a:["سبز","آبی","قرمز"], correct:1},
-    {q:"سوال چهارم: ۵*۵؟", a:["۲۰","۲۵","۳۰"], correct:1},
-    {q:"سوال پنجم: تعداد روزهای هفته؟", a:["۶","۷","۸"], correct:1}
+// پنل مدیریتی (نمونه ساده برای تست)
+let quizQuestions = [
+    {question: 'طلاق توافقی چیست؟', options: ['گزینه ۱', 'گزینه ۲', 'گزینه ۳'], answer: 0},
+    {question: 'مهریه چیست؟', options: ['گزینه ۱', 'گزینه ۲', 'گزینه ۳'], answer: 1},
+    {question: 'نفقه شامل چه مواردی است؟', options: ['گزینه ۱', 'گزینه ۲', 'گزینه ۳'], answer: 2},
+    {question: 'خیانت در قانون ایران چه مجازاتی دارد؟', options: ['گزینه ۱', 'گزینه ۲', 'گزینه ۳'], answer: 1},
+    {question: 'میانجیگری چیست؟', options: ['گزینه ۱', 'گزینه ۲', 'گزینه ۳'], answer: 0}
 ];
 
-// بروزرسانی امتیاز
-function updateScore(points){
-    score += points;
-    userScoreSpan.textContent = score;
+function getQuizQuestions() {
+    return quizQuestions;
 }
 
-// تولید لینک بنر اختصاصی
-getBannerBtn.onclick = () => {
-    const bannerURL = `https://t.me/Hamserr?start=${userID}`;
-    userBannerInput.value = bannerURL;
-    bannerDiv.style.display = "block";
-};
-
-// کپی لینک به کلیپ‌بورد
-copyBannerBtn.onclick = () => {
-    userBannerInput.select();
-    document.execCommand("copy");
-    alert("لینک بنر کپی شد. با اشتراک گذاری، هر عضویت جدید +۱ امتیاز!");
-};
-
-// شبیه‌سازی عضویت جدید (هر بار که کاربر لینک ارسال شده عضو شود)
-function newMembershipAdded(){
-    updateScore(1);
-    alert("عضویت جدید تایید شد! +1 امتیاز");
-    userPosition.innerHTML = `<h2>جایگاه شما: نفر ${Math.max(1, 10 - Math.floor(score/5))}</h2>
-                               <p>امتیاز شما: ${score}</p>
-                               <button id="getBanner" class="btn">دریافت بنر اختصاصی برای دعوت</button>`;
+function addQuestion(q) {
+    quizQuestions.push(q);
 }
 
-// شروع مسابقه
-startQuizBtn.onclick = () => {
-    // بررسی عضویت فرضی
-    window.open("https://t.me/Hamserr", "_blank"); // هدایت به کانال برای عضویت
-    setTimeout(()=>{ quizSection.style.display="block"; }, 1000); // پس از عضویت
-    startQuizBtn.parentElement.style.display="none";
-};
+function editQuestion(index, q) {
+    quizQuestions[index] = q;
+}
 
-// نمایش سوالات
-questions.forEach((q,i)=>{
-    const div = document.createElement("div");
-    div.classList.add("questionCard");
-    div.innerHTML = `<p>${q.q}</p>`;
-    q.a.forEach((ans,j)=>{
-        const btn = document.createElement("button");
-        btn.textContent = ans;
-        btn.classList.add("btn");
-        btn.onclick = () => {
-            if(j === q.correct) { updateScore(5); alert("جواب صحیح! +۵ امتیاز"); }
-            else alert("متاسفانه جواب شما صحیح نبود.");
-        }
-        div.appendChild(btn);
-    });
-    questionsDiv.appendChild(div);
-});
-
-// پایان مسابقه
-finishQuizBtn.onclick = () => {
-    quizSection.style.display="none";
-    resultsSection.style.display="block";
-    resultsDiv.innerHTML = `<p>امتیاز نهایی شما: ${score}</p>
-                            <p>ادامه دهید و بنر خود را برای ارتقای رتبه به دیگران ارسال کنید!</p>`;
-};
+function deleteQuestion(index) {
+    quizQuestions.splice(index, 1);
+}
