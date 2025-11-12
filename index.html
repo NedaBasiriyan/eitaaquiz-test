@@ -1,81 +1,23 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسابقه هوش ایتا</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسابقه حقوقی ایتا</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 <body>
-    <header class="neon">
-        <img src="assets/images/logo-main.png" alt="لوگو مسابقه" class="logo">
-        <h1>مسابقه هوش ایتا</h1>
-    </header>
-
-    <main>
-        <!-- پیام دعوت -->
-        <section class="card neon">
-            <h2>سلام علی!</h2>
-            <p>حسن تو را برای شرکت در مسابقه حقوقی کانال دکتر قهرمان دعوت کرده است.</p>
-            <p>برای شروع مسابقه باید عضو کانال شوید:</p>
-            <a href="https://t.me/Hamserr" target="_blank" class="btn">عضویت در کانال</a>
-        </section>
-
-        <!-- جوایز -->
-        <section class="card neon">
-            <h2>جوایز مسابقه</h2>
-            <ul>
-                <li>نفر اول: ۵۰۰ هزار تومان</li>
-                <li>نفر دوم: ۲۰۰ هزار تومان</li>
-                <li>۸ نفر بعدی: هر کدام ۱۰۰ هزار تومان</li>
-            </ul>
-        </section>
-
-        <!-- شرایط -->
-        <section class="card neon">
-            <h2>شرایط شرکت</h2>
-            <ol>
-                <li>عضویت در کانال</li>
-                <li>افزایش امتیاز از دو طریق:
-                    <ul>
-                        <li>فرستادن بنر به دیگران و عضویت آن‌ها</li>
-                        <li>پاسخ‌دهی به سوالات مسابقه</li>
-                    </ul>
-                </li>
-            </ol>
-        </section>
-
-        <!-- راهنمای مسابقه -->
-        <section class="card neon" id="userPosition">
-            <h2>جایگاه شما: نفر ۱۲</h2>
-            <p>امتیاز شما: <span id="userScore">0</span></p>
-            <button id="getBanner" class="btn">دریافت بنر اختصاصی برای دعوت</button>
-            <div id="bannerLink" style="display:none; margin-top:10px;">
-                <input type="text" id="userBanner" readonly>
-                <button id="copyBanner" class="btn">کپی لینک</button>
-            </div>
-        </section>
-
-        <!-- شروع مسابقه -->
-        <section class="card neon">
-            <button id="startQuiz" class="btn">شروع مسابقه</button>
-        </section>
-
-        <!-- بخش سوالات -->
-        <section class="card neon" id="quizSection" style="display:none;">
-            <h2>سوالات مسابقه</h2>
-            <div id="questions"></div>
-            <button id="finishQuiz" class="btn">پایان مسابقه</button>
-        </section>
-
-        <!-- نتایج -->
-        <section class="card neon" id="resultsSection" style="display:none;">
-            <h2>نتایج مسابقه</h2>
-            <div id="results"></div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
+<div class="background-main">
+  <div class="welcome-card">
+    <h1>خوش آمدید به مسابقه حقوقی!</h1>
+    <p>برای شروع، لطفاً یک کاراکتر انتخاب کنید:</p>
+    <div class="character-selection">
+      <img src="assets/images/character_male.jpeg" alt="مرد" onclick="selectCharacter('male')">
+      <img src="assets/images/character_female33.jpeg" alt="زن" onclick="selectCharacter('female')">
+    </div>
+    <button id="startBtn" onclick="goToMembership()">شروع مسابقه</button>
+  </div>
+</div>
 </body>
 </html>
