@@ -7,37 +7,27 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background-main">
-    <!-- کاراکترها بالای صفحه -->
-    <div class="character-row">
-      <div class="character-card">
-        <img src="assets/images/character_female.jpeg" alt="کاراکتر زن" onclick="selectCharacter('female')" id="female-img">
-        <p>زن</p>
-      </div>
-      <div class="character-card">
-        <img src="assets/images/character_male.jpeg" alt="کاراکتر مرد" onclick="selectCharacter('male')" id="male-img">
-        <p>مرد</p>
-      </div>
+<div class="background-main">
+  <div class="character-row">
+    <div class="character-card">
+      <img src="assets/images/character_female.jpeg" alt="کاراکتر زن" onclick="selectCharacter('female')" id="female-img">
+      <p>زن</p>
     </div>
-
-    <!-- پیام نئونی پایین -->
-    <div class="bottom-box neon-box">
-      <p class="info">کاراکتر خود را انتخاب کنید تا تجربه‌ی مسابقه برای شما شخصی‌سازی شود.</p>
-      <p class="hint">پس از انتخاب، به مرحله عضویت هدایت می‌شوید.</p>
+    <div class="character-card">
+      <img src="assets/images/character_male.jpeg" alt="کاراکتر مرد" onclick="selectCharacter('male')" id="male-img">
+      <p>مرد</p>
     </div>
   </div>
-
+  <div class="bottom-box neon-box">
+    <p class="info">کاراکتر خود را انتخاب کنید تا تجربه‌ی مسابقه شخصی‌سازی شود.</p>
+  </div>
+</div>
 <script>
 function selectCharacter(type){
-  // ذخیره انتخاب کاربر
   localStorage.setItem('selectedCharacter', type);
-  // یک پرچم کوچک برای استفاده آتی
   localStorage.setItem('hasSelectedCharacter', '1');
-  // روان به صفحه عضویت (عضویت اجباری)
-  window.location.href = 'join.html';
+  window.location.href = 'quiz.html';
 }
-
-// کوچک‌سازی تصویر روی کلیک بصری
 document.querySelectorAll('.character-card img').forEach(img=>{
   img.addEventListener('click', ()=>{
     document.querySelectorAll('.character-card img').forEach(i => i.classList.remove('selected'));
