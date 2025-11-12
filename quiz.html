@@ -2,16 +2,51 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>مسابقه</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسابقه هوش</title>
 <link rel="stylesheet" href="style.css">
-<script src="quiz.js" defer></script>
 </head>
 <body>
-<div class="question-bg">
-    <div id="character-display"></div>
-    <div id="question-box"></div>
-    <div id="options-box"></div>
-    <div id="score-box"></div>
+
+<div class="main-bg" style="background-image: url('assets/images/background_main.jpg');">
+
+  <!-- نوار بالایی برای امتیاز و کاراکتر -->
+  <div class="top-bar neon-box">
+    <div id="score">امتیاز: 0</div>
+    <div id="character-display">
+      <img id="user-character" src="" alt="کاراکتر انتخاب شده" />
+    </div>
+  </div>
+
+  <!-- سوالات -->
+  <div class="quiz-container neon-box">
+    <h2 id="question-text">سوال بارگذاری می‌شود...</h2>
+    <div class="answers">
+      <button class="answer-btn" data-answer="0">جواب 1</button>
+      <button class="answer-btn" data-answer="1">جواب 2</button>
+      <button class="answer-btn" data-answer="2">جواب 3</button>
+      <button class="answer-btn" data-answer="3">جواب 4</button>
+    </div>
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <!-- لینک دعوت -->
+  <div class="invite-box neon-box">
+    <p>لینک اختصاصی شما برای دعوت دوستان:</p>
+    <input type="text" id="invite-link" readonly>
+  </div>
+
 </div>
+
+<script src="quiz.js"></script>
+<script>
+const userCharacter = localStorage.getItem('selectedCharacter');
+document.getElementById('user-character').src = userCharacter || 'assets/images/character_female.jpeg';
+
+// لینک اختصاصی
+const inviteInput = document.getElementById('invite-link');
+inviteInput.value = window.location.href + "?ref=" + Math.random().toString(36).substring(2, 8);
+</script>
+
 </body>
 </html>
