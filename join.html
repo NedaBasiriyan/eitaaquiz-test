@@ -3,39 +3,71 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>عضویت در کانال</title>
-<link rel="stylesheet" href="style.css">
+<title>عضویت در کانال — مسابقه</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="background-main">
     <div class="neon-box join-box">
-      <h2>عضویت اجباری قبل از شروع مسابقه</h2>
-      <p>برای شرکت در مسابقه باید عضو کانال رسمی زیر شوید:</p>
-      <p class="channel">@hamserr</p>
-      <p class="channel-desc">
-        👨‍👩‍👧 طلاق، مهریه، نفقه، میانجیگری، مشاوره حقوقی — دکتر قهرمان
-      </p>
+      <h2>برای شرکت در مسابقه، ابتدا در کانال زیر عضو شوید</h2>
 
-      <!-- دکمه‌ی بازکردن کانال -->
-      <div class="join-actions">
-        <a class="btn-secondary" id="open-channel" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">باز کردن صفحه کانال</a>
-        <!-- کاربر پس از عضویت این دکمه را می‌زند -->
-        <button class="btn-primary" id="confirm-joined">✅ من عضو شدم — ادامه مسابقه</button>
+      <p class="channel">@hamserr</p>
+      <p class="channel-desc">👨‍👩‍👧 طلاق، مهریه، نفقه و مشاوره حقوقی — دکتر قهرمان</p>
+
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+        <a class="btn-secondary" id="open-channel" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">
+          باز کردن صفحه کانال
+        </a>
+
+        <button class="btn-primary" id="paste-code-btn" onclick="showCodeInput()">
+          ✅ من عضو شدم — کد عضویت دارم
+        </button>
       </div>
 
-      <p class="note">اگر هنوز عضو نشده‌اید، پس از باز کردن لینک کانال و کلیک روی دکمه عضویت در ایتا، برگردید و «من عضو شدم» را بزنید.</p>
+      <div id="code-area" style="display:none;margin-top:14px;">
+        <p>کدی که در پست خوش‌آمد کانال منتشر شده را وارد کنید:</p>
+        <input id="joinCodeInput" placeholder="کد عضویت را اینجا وارد کنید" style="padding:10px;border-radius:8px;width:80%;"/>
+        <div style="margin-top:10px;">
+          <button class="btn-primary" id="confirm-join">تأیید و ادامه مسابقه</button>
+        </div>
+        <p style="margin-top:10px;color:#bfe">اگر کد را نمی‌بینید، از مدیر کانال بخواهید کد را مجدداً منتشر کند یا از دکمه‌ی تماس در پنل مدیریت استفاده کنید.</p>
+      </div>
+
+      <p class="note">پس از وارد کردن کد، سیستم بررسی می‌کند و در صورت سازگاری شما به مسابقه هدایت می‌شوید.</p>
     </div>
   </div>
 
 <script>
-// کارکرد عضویت: چون بررسی سروری ممکن نیست، کاربر روی "من عضو شدم" کلیک می‌کند.
-// این پرچم نشان می‌دهد که عضو شده و اجازه ورود به مسابقه داده می‌شود.
-document.getElementById('confirm-joined').addEventListener('click', ()=>{
-  // ست کردن پرچم عضویت
-  localStorage.setItem('joinedChannel', 'true');
-  // بازگشت روان به تست/مرحله بعد
-  // اگر نیاز به اعضای بیشتر (تعداد کانال‌ها) باشد، آن را از config.json می‌خوانیم در اجرا
-  window.location.href = 'quiz.html';
+function showCodeInput(){
+  document.getElementById('code-area').style.display = 'block';
+  document.getElementById('joinCodeInput').focus();
+}
+
+// هنگام تأیید: چک می‌کنیم که ورودی با JoinCode ذخیره‌شده در localStorage یا config (از admin) برابر باشد.
+document.getElementById('confirm-join').addEventListener('click', ()=>{
+  const entered = (document.getElementById('joinCodeInput').value || '').trim();
+  if(!entered){
+    alert('لطفاً کد عضویت را وارد کنید.');
+    return;
+  }
+  // مقدار ذخیره‌شده (admin در localStorage یا fallback به config.json)
+  const cfg = JSON.parse(localStorage.getItem('quizConfig') || '{}');
+  const stored = cfg.joinCode || '';
+  if(!stored){
+    // fallback: اگر admin هنوز کدی تعیین نکرده، اجازه نمیده و پیام میده
+    alert('کد عضویت هنوز توسط مدیر تنظیم نشده — لطفاً اندکی صبر کنید یا از مدیر کد را درخواست کنید.');
+    return;
+  }
+  if(entered === stored){
+    // اعتبارسنجی موفق
+    localStorage.setItem('joinedChannel', 'true');
+    // ذخیره زمان عضویت برای بررسی‌های احتمالی
+    localStorage.setItem('joinedAt', new Date().toISOString());
+    // بازگشت به صفحه اصلی مسابقه
+    window.location.href = 'quiz.html';
+  } else {
+    alert('کد وارد شده نامعتبر است. لطفاً دقیقاً کدی که در کانال منتشر شده را وارد کنید.');
+  }
 });
 </script>
 </body>
