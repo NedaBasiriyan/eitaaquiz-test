@@ -1,44 +1,63 @@
-let config = {}; 
-fetch('config.json')
-.then(res => res.json())
-.then(data => {
-    config = data;
-    startQuiz();
-});
+const questions = [
+  {
+    text: "اولین سوال چیست؟",
+    answers: ["گزینه 1", "گزینه 2", "گزینه 3", "گزینه 4"],
+    correct: 1
+  },
+  {
+    text: "سوال دوم؟",
+    answers: ["الف", "ب", "ج", "د"],
+    correct: 0
+  },
+  // سوالات بیشتر را اینجا اضافه کنید
+];
 
-let current = 0;
+let currentQuestion = 0;
 let score = 0;
 
-function startQuiz(){
-    showQuestion(current);
+const questionText = document.getElementById('question-text');
+const answerBtns = document.querySelectorAll('.answer-btn');
+const feedback = document.getElementById('feedback');
+const scoreDisplay = document.getElementById('score');
+
+function loadQuestion() {
+  const q = questions[currentQuestion];
+  questionText.textContent = q.text;
+  answerBtns.forEach((btn, i) => {
+    btn.textContent = q.answers[i];
+    btn.disabled = false;
+    btn.style.backgroundColor = "";
+  });
+  feedback.textContent = "";
 }
 
-function showQuestion(index){
-    const q = config.questions[index];
-    const qBox = document.getElementById('question-box');
-    qBox.innerHTML = `<h2>${q.text}</h2>`;
-    const oBox = document.getElementById('options-box');
-    oBox.innerHTML = '';
-    q.options.forEach((opt, i)=>{
-        let btn = document.createElement('button');
-        btn.innerText = opt;
-        btn.onclick = ()=> checkAnswer(i, q.answer, q.points);
-        oBox.appendChild(btn);
-    });
-}
+answerBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answerIndex = parseInt(btn.dataset.answer);
+    const q = questions[currentQuestion];
 
-function checkAnswer(selected, correct, points){
-    if(selected === correct){
-        score += points;
-        alert("جواب درست! امتیاز شما: " + score);
+    if(answerIndex === q.correct){
+      btn.style.backgroundColor = "green";
+      feedback.textContent = "پاسخ درست!";
+      score += 10;
     } else {
-        alert("جواب اشتباه!");
+      btn.style.backgroundColor = "red";
+      feedback.textContent = "پاسخ غلط!";
     }
-    current++;
-    if(current < config.questions.length){
-        showQuestion(current);
-    } else {
+
+    scoreDisplay.textContent = "امتیاز: " + score;
+    answerBtns.forEach(b => b.disabled = true);
+
+    setTimeout(() => {
+      currentQuestion++;
+      if(currentQuestion < questions.length){
+        loadQuestion();
+      } else {
         localStorage.setItem('finalScore', score);
-        window.location.href = 'result.html';
-    }
-}
+        window.location.href = "result.html";
+      }
+    }, 1000);
+  });
+});
+
+loadQuestion();
