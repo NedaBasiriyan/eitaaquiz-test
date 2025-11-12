@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>عضویت در کانال - مسابقه حقوقی</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-main">
+
+    <!-- لوگو بالای صفحه -->
+    <header class="top-header">
+      <img src="assets/images/logo-main.png" alt="لوگو" class="logo">
+    </header>
+
+    <!-- محتوا -->
+    <main class="center-area">
+      <section class="membership-section neon-box">
+        <h2>عضویت در کانال</h2>
+        <p>برای شرکت در مسابقه، ابتدا در کانال زیر عضو شوید:</p>
+        <a href="https://t.me/YourChannelName" target="_blank" class="btn-primary">رفتن به کانال</a>
+        
+        <p>پس از عضویت، دکمه زیر را بزنید تا عضویت شما تایید شود و وارد مسابقه شوید:</p>
+        <button class="btn-primary" onclick="verifyMembership()">تایید عضویت و ادامه</button>
+
+        <p id="verifyMessage" class="verify-text"></p>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    function verifyMembership() {
+      // شبیه‌سازی تایید عضویت (در نسخه واقعی باید API یا webhook بررسی شود)
+      const verified = confirm("آیا عضویت شما در کانال تایید شد؟");
+
+      const messageEl = document.getElementById("verifyMessage");
+      if (verified) {
+        messageEl.textContent = "عضویت تایید شد! شما وارد مسابقه می‌شوید.";
+        messageEl.style.color = "green";
+        setTimeout(() => {
+          window.location.href = "quiz.html"; // هدایت به صفحه سوالات
+        }, 1500);
+      } else {
+        messageEl.textContent = "لطفا ابتدا عضو کانال شوید و سپس تایید کنید.";
+        messageEl.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
