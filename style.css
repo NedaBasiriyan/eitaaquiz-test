@@ -1,55 +1,102 @@
-body, html{
-  margin:0;
-  padding:0;
-  font-family: Vazir, Tahoma, sans-serif;
-  direction: rtl;
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg-dark:#071317;
+  --neon:#22f0df;
+  --neon-weak:rgba(34,240,223,0.12);
+  --glass: rgba(0,0,0,0.45);
+  --accent: #00f5d4;
 }
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Vazirmatn', Tahoma, sans-serif;direction:rtl;background:#000}
 
 .background-main{
-  background: url('assets/images/background_main.jpg') no-repeat center center fixed;
+  min-height:100vh;
+  background-image: url('assets/images/background_main.jpg');
   background-size: cover;
-  min-height: 100vh;
+  background-position: center;
   display:flex;
-  justify-content:center;
-  align-items:center;
   flex-direction:column;
+  align-items:stretch;
+  justify-content:space-between;
+  gap:10px;
+  padding:18px;
 }
 
-.logo{
-  width:150px;
-  margin-bottom:20px;
-}
+/* بالای صفحه - لوگو */
+.top-header{display:flex;justify-content:center;align-items:center;padding-top:8px}
+.logo{width:140px;height:auto;filter:drop-shadow(0 0 10px rgba(34,240,223,0.25))}
 
-.container, .neon-box, .quiz-container, .admin-panel{
-  background: rgba(0,0,0,0.5);
-  border: 2px solid #0ff;
-  box-shadow: 0 0 20px #0ff;
-  padding:20px;
-  border-radius:15px;
+/* فضای میانی */
+.center-area{flex:1;display:flex;align-items:center;justify-content:center}
+
+/* کاراکترها در صفحه انتخاب */
+.character-row{display:flex;justify-content:center;gap:50px;padding-top:40px}
+.character-card{text-align:center}
+.character-card img{width:150px;height:150px;object-fit:cover;border-radius:14px;border:3px solid rgba(255,255,255,0.06);cursor:pointer;transition:all .18s ease}
+.character-card img.selected{transform:translateY(-6px) scale(.98);box-shadow:0 0 18px var(--neon)}
+.character-card p{margin-top:8px;color:#e6ffff}
+
+/* کادر نئونی پایه */
+.neon-box{
+  margin:10px auto;
+  background:var(--glass);
+  border-radius:14px;
+  padding:16px;
+  max-width:1100px;
+  color:#eafcfb;
+  border:1px solid rgba(34,240,223,0.12);
+  box-shadow:0 0 18px rgba(34,240,223,0.06);
   text-align:center;
-  color:#fff;
 }
 
-.btn-start, button{
-  padding:10px 20px;
-  margin:10px;
-  background:#0ff;
-  border:none;
-  border-radius:10px;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
+/* footer پایین صفحه خوش‌آمد */
+.bottom-box{margin-bottom:22px}
+.bottom-box h1{margin:0 0 6px;font-size:1.6rem;color:var(--neon);text-shadow:0 0 10px rgba(34,240,223,0.25)}
+.bottom-box p{margin:6px 0;color:#bff6f0}
 
-.character-container img, .character-display img{
-  width:120px;
-  margin:10px;
-  cursor:pointer;
-  border:2px solid #0ff;
-  border-radius:50%;
+/* دکمه‌ها */
+.btn-primary{
+  display:inline-block;background:var(--accent);color:#002; padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700;margin-top:10px;
+  box-shadow:0 4px 16px rgba(0,255,200,0.08)
 }
+.btn-secondary{display:inline-block;background:transparent;border:2px solid var(--accent);color:var(--neon);padding:8px 14px;border-radius:10px;text-decoration:none;margin-right:8px}
+.btn-small{padding:6px 10px;border-radius:8px;border:none;background:var(--accent);cursor:pointer}
 
-.score-box{
-  margin-top:20px;
-  font-size:20px;
+/* صفحه سوالات */
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px}
+.top-bar .mini-character img{width:60px;border-radius:12px}
+.score-inline{font-weight:700;color:#dff;}
+
+/* ناحیه مسابقه */
+.quiz-area{display:flex;gap:18px;align-items:flex-start;justify-content:center;padding:24px;flex-wrap:wrap}
+.question-card{width:640px;text-align:right;padding:22px}
+.question-card h3{margin:0 0 14px;font-size:1.25rem;color:#eafff9}
+.answers-list{display:flex;flex-direction:column;gap:10px}
+.answers-list button{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-align:right;transition:all .18s}
+.answers-list button:hover{transform:scale(1.02);box-shadow:0 0 8px rgba(34,240,223,0.08)}
+.answers-list button.correct{background:rgba(0,255,0,0.18);border-color:rgba(0,255,0,0.4)}
+.answers-list button.wrong{background:rgba(255,0,0,0.16);border-color:rgba(255,0,0,0.4)}
+
+/* invite box */
+.invite-box{width:320px;padding:14px}
+.invite-box input{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#eafffb;margin-bottom:8px}
+
+/* نتیجه / بنر */
+.result-box{max-width:720px;margin:40px auto}
+.user-banner{display:flex;gap:12px;align-items:center;justify-content:center;margin:10px}
+.user-banner img{width:110px;border-radius:50%;border:3px solid rgba(34,240,223,0.15)}
+
+/* پنل مدیریت */
+.admin-box{max-width:920px;margin:24px auto;text-align:right}
+.admin-actions input{width:60%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);margin:8px 0}
+
+/* واکنش‌گرایی موبایل */
+@media (max-width:820px){
+  .character-card img{width:120px;height:120px}
+  .question-card{width:92%}
+  .invite-box{width:92%}
+  .user-banner img{width:80px}
+  .logo{width:120px}
 }
