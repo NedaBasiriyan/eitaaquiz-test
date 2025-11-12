@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مسابقه</title>
-<link rel="stylesheet" href="style.css">
-<script src="quiz.js"></script>
-</head>
-<body>
-<div class="background-main">
-  <div class="quiz-container">
-    <div class="character-display">
-      <img id="player-character" src="" alt="کاراکتر شما">
-    </div>
-    <div id="question-box" class="neon-box">
-      <h3 id="question-text"></h3>
-      <div id="answers"></div>
-    </div>
-    <div class="score-box neon-box">
-      <span>امتیاز: <span id="score">0</span></span>
-    </div>
+<div class="quiz-container">
+  <div class="character-display">
+    <img id="player-character" src="" alt="کاراکتر شما">
+  </div>
+  <div id="question-box" class="neon-box">
+    <h3 id="question-text"></h3>
+    <div id="answers"></div>
+  </div>
+  <div class="score-box neon-box">
+    <span>امتیاز: <span id="score">0</span></span>
   </div>
 </div>
 <script>
@@ -29,5 +17,3 @@ document.getElementById('player-character').src =
   'assets/images/character_male.jpeg';
 startQuiz();
 </script>
-</body>
-</html>
