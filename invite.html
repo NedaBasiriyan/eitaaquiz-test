@@ -1,29 +1,24 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>دعوت دوستان</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>دعوت از دوستان</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="background-main">
-  <div class="neon-box">
-    <h2>دعوت دوستان و جمع‌آوری امتیاز بیشتر</h2>
-    <p>برای شرکت در مسابقه ابتدا در کانال زیر عضو شوید:</p>
-    <p class="channel">@hamserr</p>
-    <div class="join-actions">
-      <a class="btn-secondary" href="https://eitaa.com/hamserr" target="_blank" rel="noopener">باز کردن صفحه کانال</a>
-      <button class="btn-primary" id="confirm-joined">✅ من عضو شدم — ادامه مسابقه</button>
+    <div class="background-container">
+        <div class="invite-container neon-box">
+            <h1>دعوت از دوستان</h1>
+            <p>برای کسب امتیاز بیشتر، دوستان خود را به مسابقه دعوت کنید!</p>
+            <ul>
+                <li>هر دوست دعوت‌شده که عضو مسابقه شود، 10 امتیاز اضافه دریافت می‌کنید</li>
+                <li>امتیازهای دعوت‌شده‌ها به طور خودکار به حساب شما اضافه می‌شوند</li>
+            </ul>
+            <p>برای ادامه مسابقه، روی دکمه زیر کلیک کنید:</p>
+            <div class="invite-buttons">
+                <a href="join.html" class="btn">ادامه مسابقه</a>
+            </div>
+        </div>
     </div>
-    <p class="note">پس از عضویت، برای ادامه مسابقه روی «من عضو شدم» کلیک کنید.</p>
-  </div>
-</div>
-<script>
-document.getElementById('confirm-joined').addEventListener('click', ()=>{
-  localStorage.setItem('joinedChannel', 'true');
-  window.location.href = 'character.html';
-});
-</script>
 </body>
 </html>
